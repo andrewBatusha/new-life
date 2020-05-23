@@ -67,12 +67,11 @@ public class LedgerServiceImpl implements LedgerService {
      * @return saved Ledger entity
      */
     @Override
-    @Transactional(propagation=Propagation.REQUIRED)
     public Ledger save(Ledger object) {
         object.setDueTime(LocalDateTime.now());
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
-        transferLedger(object);
+//        transferLedger(object);
         return ledgerRepository.save(object);
     }
 
