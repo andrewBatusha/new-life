@@ -1,13 +1,12 @@
 package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Business;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
-@JsonIgnoreProperties(value = { "business" })
 public class BuildingDTO {
     private UUID id;
 
@@ -15,5 +14,6 @@ public class BuildingDTO {
 
     private String geolocation;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;
 }
