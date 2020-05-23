@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface BuildingService extends BasicService<Building, UUID>{
     boolean isBuildingExistsWithTitle(String title);
+
+    public Building addUserToBuilding(Building object, String email);
 }

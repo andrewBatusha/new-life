@@ -109,7 +109,8 @@ public class LedgerServiceImpl implements LedgerService {
                     object.getName(),
                     object.getQuantity(),
                     object.getUnitOfMeasurement(),
-                    object.getBuilding()), object.getBookkeeping());
+                    object.getBuilding()),
+                    object.getBookkeeping());
         } else if (object.getProcurementType() == ProcurementType.EQUIPMENT) {
             equipmentService.save(new Equipment(
                     null,

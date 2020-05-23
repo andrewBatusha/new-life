@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class BuildingDTO {
+public class AddManagerToBuildingDTO {
     private UUID id;
 
     private String name;
@@ -29,6 +29,6 @@ public class BuildingDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User user;
 }

@@ -64,7 +64,7 @@ public class AuthenticationController {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, requestDto.getPassword()));
         String token = jwtTokenProvider.createToken(username, user.getRole().toString());
 
-        return ResponseEntity.ok(new AuthenticationResponseDTO(username, token));
+        return ResponseEntity.ok(new AuthenticationResponseDTO(username, user.getRole(), token));
     }
 
     @PostMapping("/sign-up")

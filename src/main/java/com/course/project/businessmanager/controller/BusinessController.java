@@ -1,6 +1,6 @@
 package com.course.project.businessmanager.controller;
 
-import com.course.project.businessmanager.dto.AddUserToBusinessDTO;
+import com.course.project.businessmanager.dto.AddOwnerToBusinessDTO;
 import com.course.project.businessmanager.dto.BusinessDTO;
 import com.course.project.businessmanager.entity.Business;
 import com.course.project.businessmanager.entity.User;
@@ -77,17 +77,17 @@ public class BusinessController {
 
     @PutMapping("/user")
     @ApiOperation(value = "Add user to existing business")
-    public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddUserToBusinessDTO addUserToBusinessDTO) {
-        log.info("In update (addUserToBusinessDTO = [{}])", addUserToBusinessDTO);
+    public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO, HttpServletRequest req) {
+        log.info("In update (addUserToBusinessDTO = [{}])", addOwnerToBusinessDTO);
+        String token = jwtTokenProvider.resolveToken(req);
+        String username = jwtTokenProvider.getUsername(token);
         Business updatedBusiness = businessService.addUserToBusiness(
-                businessMapper.convertToEntity(addUserToBusinessDTO),
-                addUserToBusinessDTO.getEmail()
+                businessMapper.convertToEntity(addOwnerToBusinessDTO),
+                username
         );
         Business business = businessService.update(updatedBusiness);
         return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));
     }
-
-
 
     @DeleteMapping("/{id}")
     @ApiOperation(value = "Delete business by id")

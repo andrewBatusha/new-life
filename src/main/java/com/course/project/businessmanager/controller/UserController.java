@@ -55,14 +55,24 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userMapper.toUserDTO(user));
     }
 
-    @GetMapping("/token")
-    @ApiOperation(value = "Get user by token in header")
-    public ResponseEntity<List<BusinessDTO>> getByToken(HttpServletRequest req) {
+    @GetMapping("/business")
+    @ApiOperation(value = "Get users businesses by token in header")
+    public ResponseEntity<List<BusinessDTO>> getBusinessByUser(HttpServletRequest req) {
         log.info("Enter into get method with by header ");
         String token = jwtTokenProvider.resolveToken(req);
         String email = jwtTokenProvider.getUsername(token);
         User user = userService.findByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDtoList(user.getBusinessList()));
+    }
+
+    @GetMapping("/token")
+    @ApiOperation(value = "Get users businesses by token in header")
+    public ResponseEntity<UserDTO> getUserByToken(HttpServletRequest req) {
+        log.info("Enter into get method with by header ");
+        String token = jwtTokenProvider.resolveToken(req);
+        String email = jwtTokenProvider.getUsername(token);
+        User user = userService.findByEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(userMapper.toUserDTO(user));
     }
 
     @PostMapping

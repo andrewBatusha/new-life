@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class AddUserToBusinessDTO {
+public class AddOwnerToBusinessDTO {
     private UUID id;
 
     private String name;
@@ -17,6 +17,4 @@ public class AddUserToBusinessDTO {
     private List<User> users = new ArrayList<>();
 
     private List<Building> buildings = new ArrayList<>();
-
-    private String email;
 }

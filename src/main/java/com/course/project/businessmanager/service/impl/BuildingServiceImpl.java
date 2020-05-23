@@ -1,10 +1,14 @@
 package com.course.project.businessmanager.service.impl;
 
 import com.course.project.businessmanager.entity.Building;
+import com.course.project.businessmanager.entity.Business;
+import com.course.project.businessmanager.entity.User;
+import com.course.project.businessmanager.entity.enums.Role;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
 import com.course.project.businessmanager.exception.FieldAlreadyExistsException;
 import com.course.project.businessmanager.repository.BuildingRepository;
 import com.course.project.businessmanager.service.BuildingService;
+import com.course.project.businessmanager.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +23,13 @@ import java.util.UUID;
 public class BuildingServiceImpl implements BuildingService {
 
     private final BuildingRepository buildingRepository;
+    private final UserService userService;
 
     @Autowired
-    public BuildingServiceImpl(BuildingRepository buildingRepository) {
+    public BuildingServiceImpl(BuildingRepository buildingRepository, UserService userService) {
         this.buildingRepository = buildingRepository;
+        this.userService = userService;
     }
-
 
     /**
      * Method gets information from Repository for particular иuilding with id parameter
@@ -48,6 +53,14 @@ public class BuildingServiceImpl implements BuildingService {
     public List<Building> getAll() {
         log.info("In getAll()");
         return buildingRepository.getAll();
+    }
+
+    @Override
+    public Building addUserToBuilding(Building object, String email){
+        log.info("In addUserToBusiness(entity = [{}], email = [{}]", object, email);
+        User user = userService.createManager(email);
+        object.setUser(user);
+        return object;
     }
 
     /**

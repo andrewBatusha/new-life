@@ -13,4 +13,5 @@ public interface UserService extends BasicService<User, UUID>{
     void resetPassword(String email);
     User createSocialUser(OAuth2User oAuth2User);
     Optional<User> findSocialUser(String email);
+    public User createManager(String email);
 }

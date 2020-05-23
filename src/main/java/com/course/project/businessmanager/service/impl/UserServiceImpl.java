@@ -20,6 +20,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -159,7 +161,6 @@ public class UserServiceImpl implements UserService {
      * The method used for registration User
      *
      * @param user Entity User used for registration User in system
-
      * @return User entity
      * @throws IncorrectPasswordException when password is incorrect or not strong enough
      */
@@ -187,6 +188,38 @@ public class UserServiceImpl implements UserService {
         }
 
         return registrationUser;
+    }
+
+    @Override
+    public User createManager(String email) {
+        log.info("Enter into createManager method  with email:{}", email);
+        if (!email.matches(PASSWORD_MATCHES)) {
+            throw new IncorrectEmailException("Invalid email. Try again, please.");
+        }
+        User user = userRepository.findByEmail(email).orElse(null);
+        if (user == null) {
+            RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder()
+                    .withinRange(33, 123)
+                    .filteredBy(CharacterPredicates.ASCII_ALPHA_NUMERALS)
+                    .build();
+            String password = pwdGenerator.generate(15);
+            String token = UUID.randomUUID().toString();
+            user = new User(null, email, password, Role.ROLE_MANAGER, Collections.emptyList(), token);
+            save(user);
+
+            String registrationMessage = "Hello, " + user.getEmail() + ".\n" +
+                    "You received this email because your owner requested your email to registration on our site.\n" +
+                    "For successfully sign up and activate your profile, you have to follow the next link: ";
+
+            String link = url + "/activation-page?token=" + token;
+            String message = registrationMessage + " \r\n" + link;
+            String subject = "Activation account";
+            mailService.send(user.getEmail(), subject, message);
+        } else {
+            throw new IncorrectEmailException("User with such email already exist");
+        }
+
+        return user;
     }
 
     /**

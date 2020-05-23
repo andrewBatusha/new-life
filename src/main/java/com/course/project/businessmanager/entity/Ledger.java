@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -60,6 +61,5 @@ public class Ledger implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buildings_id", nullable = false)
     private Building building;
-
 
 }

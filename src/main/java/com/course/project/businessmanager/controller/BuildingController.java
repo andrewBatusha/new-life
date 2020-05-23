@@ -1,9 +1,11 @@
 package com.course.project.businessmanager.controller;
 
 
+import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.mapper.BuildingMapper;
+import com.course.project.businessmanager.security.jwt.JwtTokenProvider;
 import com.course.project.businessmanager.service.BuildingService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,12 +34,15 @@ public class BuildingController {
 
     private final BuildingService buildingService;
     private final BuildingMapper buildingMapper;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper) {
+    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper, JwtTokenProvider jwtTokenProvider) {
         this.buildingService = buildingService;
         this.buildingMapper = buildingMapper;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
+
     @GetMapping
     @ApiOperation(value = "Get the list of all buildings")
     public ResponseEntity<List<BuildingDTO>> list() {
@@ -44,6 +50,19 @@ public class BuildingController {
         return ResponseEntity.ok().body(buildingMapper.convertToDtoList(buildingService.getAll()));
     }
 
+    @PutMapping("/user")
+    @ApiOperation(value = "Add user to existing building")
+    public ResponseEntity<BuildingDTO> addUserToBuilding(@RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO, HttpServletRequest req) {
+        log.info("In addUserToBusiness (addManagerToBuildingDTO = [{}])", addManagerToBuildingDTO);
+        String token = jwtTokenProvider.resolveToken(req);
+        String username = jwtTokenProvider.getUsername(token);
+        Building updatedBuilding = buildingService.addUserToBuilding(
+                buildingMapper.convertToEntity(addManagerToBuildingDTO),
+                username
+        );
+        Building building = buildingService.update(updatedBuilding);
+        return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));
+    }
 
     @PostMapping
     @ApiOperation(value = "Create new building")

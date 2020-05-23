@@ -10,4 +10,3 @@ import lombok.NoArgsConstructor;
 public class MessageDTO {
     private String message;
 }
-
