@@ -58,7 +58,7 @@ public class Ledger implements Serializable {
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buildings_id")
+    @JoinColumn(name = "buildings_id", nullable = false)
     private Building building;
 
 

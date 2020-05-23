@@ -10,6 +10,7 @@ import lombok.ToString;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,7 +60,7 @@ public class Business implements Serializable {
     )
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(mappedBy = "business")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "business")
     private List<Building> buildings = new ArrayList<>();
 
 }

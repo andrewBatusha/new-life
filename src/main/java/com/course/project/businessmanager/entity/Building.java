@@ -48,7 +48,6 @@ public class Building implements Serializable {
     private String geolocation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JoinColumn(name = "business_id", nullable = false)
     private Business business;
 }

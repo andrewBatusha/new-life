@@ -40,6 +40,6 @@ public class Equipment implements Serializable {
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buildings_id")
+    @JoinColumn(name = "buildings_id", nullable = false)
     private Building building;
 }

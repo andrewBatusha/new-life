@@ -51,7 +51,7 @@ public class Note implements Serializable {
     private NoteType noteType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id")
+    @JoinColumn(name = "business_id", nullable = false)
     private Business business;
 
 }
