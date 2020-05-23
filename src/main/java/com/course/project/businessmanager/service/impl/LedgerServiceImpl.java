@@ -70,7 +70,7 @@ public class LedgerServiceImpl implements LedgerService {
     public Ledger save(Ledger object) {
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
-        transferLedger(object);
+//        transferLedger(object);
         return ledgerRepository.save(object);
     }
 
