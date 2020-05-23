@@ -27,7 +27,7 @@ public class LedgerDTO {
 
     private ProcurementType procurementType;
 
-    private LocalDateTime dueTime = LocalDateTime.now();
+    private LocalDateTime dueTime;
 
     private String unitOfMeasurement;
 

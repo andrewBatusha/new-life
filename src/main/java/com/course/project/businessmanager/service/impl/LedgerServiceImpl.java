@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,6 +69,7 @@ public class LedgerServiceImpl implements LedgerService {
     @Override
     @Transactional(propagation=Propagation.REQUIRED)
     public Ledger save(Ledger object) {
+        object.setDueTime(LocalDateTime.now());
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
 //        transferLedger(object);
