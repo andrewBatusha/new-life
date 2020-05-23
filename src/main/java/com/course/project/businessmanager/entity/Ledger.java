@@ -22,7 +22,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -49,7 +50,7 @@ public class Ledger implements Serializable {
 
     @NotNull(message = "Due time cannot be empty")
     @Column(name = "due_time")
-    private Timestamp dueTime;
+    private Timestamp dueTime = Timestamp.valueOf(LocalDateTime.now());
 
     @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
     @Column(name = "unit_of_measurement")
