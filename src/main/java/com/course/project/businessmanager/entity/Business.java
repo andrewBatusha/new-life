@@ -35,7 +35,7 @@ import java.util.UUID;
         property = "id",
         resolver = EntityIdResolver.class,
         scope=Business.class)
-@ToString(exclude = {"buildings", "users"})
+//@ToString(exclude = {"buildings", "users"})
 public class Business implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
