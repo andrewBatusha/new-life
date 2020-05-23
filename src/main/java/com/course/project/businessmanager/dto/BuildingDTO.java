@@ -1,9 +1,14 @@
 package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Business;
+import com.course.project.businessmanager.entity.Equipment;
+import com.course.project.businessmanager.entity.Ledger;
+import com.course.project.businessmanager.entity.Warehouse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -13,6 +18,12 @@ public class BuildingDTO {
     private String name;
 
     private String geolocation;
+
+    private List<Equipment> equipment = new ArrayList<>();
+
+    private List<Ledger> ledgers = new ArrayList<>();
+
+    private List<Warehouse> warehouses = new ArrayList<>();
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;

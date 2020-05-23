@@ -62,7 +62,7 @@ public class UserController {
         String token = jwtTokenProvider.resolveToken(req);
         String email = jwtTokenProvider.getUsername(token);
         User user = userService.findByEmail(email);
-        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.toBusinessDTOs(user.getBusinessList()));
+        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDtoList(user.getBusinessList()));
     }
 
     @PostMapping

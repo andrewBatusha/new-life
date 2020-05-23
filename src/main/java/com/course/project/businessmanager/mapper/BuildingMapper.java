@@ -8,10 +8,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BuildingMapper {
-    BuildingDTO toBuildingDTO(Building building);
+    BuildingDTO convertToDto(Building building);
 
-    Building toBuilding(BuildingDTO buildingDTO);
+    Building convertToEntity(BuildingDTO buildingDTO);
 
-    List<BuildingDTO> toBuildingsDTOs(List<Building> buildings);
+    List<BuildingDTO> convertToDtoList(List<Building> buildings);
 
 }

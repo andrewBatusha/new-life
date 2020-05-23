@@ -10,12 +10,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BusinessMapper {
-    BusinessDTO toBusinessDTO(Business business);
+    BusinessDTO convertToDto(Business business);
 
-    Business toBusiness(BusinessDTO businessDTO);
+    Business convertToEntity(BusinessDTO businessDTO);
 
-    Business toBusiness(AddUserToBusinessDTO addUserToBusinessDTO);
+    Business convertToEntity(AddUserToBusinessDTO addUserToBusinessDTO);
 
-    List<BusinessDTO> toBusinessDTOs(List<Business> businessList);
+    List<BusinessDTO> convertToDtoList(List<Business> businessList);
 
 }

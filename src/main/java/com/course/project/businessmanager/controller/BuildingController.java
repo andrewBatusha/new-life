@@ -38,10 +38,10 @@ public class BuildingController {
         this.buildingMapper = buildingMapper;
     }
     @GetMapping
-    @ApiOperation(value = "Get the list of all buidings")
+    @ApiOperation(value = "Get the list of all buildings")
     public ResponseEntity<List<BuildingDTO>> list() {
         log.info("Enter into list of BuildingController");
-        return ResponseEntity.ok().body(buildingMapper.toBuildingsDTOs(buildingService.getAll()));
+        return ResponseEntity.ok().body(buildingMapper.convertToDtoList(buildingService.getAll()));
     }
 
 
@@ -49,16 +49,24 @@ public class BuildingController {
     @ApiOperation(value = "Create new building")
     public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO) {
         log.info("Enter into save of BuildingController with buildingDTO: {}", buildingDTO);
-        Building building = buildingService.save(buildingMapper.toBuilding(buildingDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.toBuildingDTO(building));
+        Building building = buildingService.save(buildingMapper.convertToEntity(buildingDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(building));
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation(value = "Get building info by id")
+    public ResponseEntity<BuildingDTO> get(@PathVariable("id") UUID id){
+        log.info("In get(id = [{}])", id);
+        Building building = buildingService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));
     }
 
     @PutMapping
     @ApiOperation(value = "Update existing building by id")
-    public ResponseEntity<BuildingDTO> update(@RequestBody BuildingDTO businessDTO) {
-        log.info("In update (buildingDTO = [{}])", businessDTO);
-        Building building = buildingService.update(buildingMapper.toBuilding(businessDTO));
-        return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.toBuildingDTO(building));
+    public ResponseEntity<BuildingDTO> update(@RequestBody BuildingDTO buildingDTO) {
+        log.info("In update (buildingDTO = [{}])", buildingDTO);
+        Building building = buildingService.update(buildingMapper.convertToEntity(buildingDTO));
+        return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));
     }
 
     @DeleteMapping("/{id}")

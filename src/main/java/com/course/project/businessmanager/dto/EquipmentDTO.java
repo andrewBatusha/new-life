@@ -2,6 +2,7 @@ package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.Employee;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.UUID;
@@ -14,5 +15,6 @@ public class EquipmentDTO {
 
     private Employee employee;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Building building;
 }

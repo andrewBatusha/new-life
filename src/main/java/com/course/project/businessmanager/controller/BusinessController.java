@@ -50,7 +50,7 @@ public class BusinessController {
     @ApiOperation(value = "Get the list of all businesses")
     public ResponseEntity<List<BusinessDTO>> list() {
         log.info("Enter into list of BusinessController");
-        return ResponseEntity.ok().body(businessMapper.toBusinessDTOs(businessService.getAll()));
+        return ResponseEntity.ok().body(businessMapper.convertToDtoList(businessService.getAll()));
     }
 
 
@@ -61,18 +61,18 @@ public class BusinessController {
         String token = jwtTokenProvider.resolveToken(req);
         String username = jwtTokenProvider.getUsername(token);
         User user = userService.findByEmail(username);
-        Business business = businessMapper.toBusiness(businessDTO);
+        Business business = businessMapper.convertToEntity(businessDTO);
         business.getUsers().add(user);
         Business newBusiness = businessService.save(business);
-        return ResponseEntity.status(HttpStatus.CREATED).body(businessMapper.toBusinessDTO(newBusiness));
+        return ResponseEntity.status(HttpStatus.CREATED).body(businessMapper.convertToDto(newBusiness));
     }
 
     @PutMapping
     @ApiOperation(value = "Update existing business by id")
     public ResponseEntity<BusinessDTO> update(@RequestBody BusinessDTO businessDTO) {
         log.info("In update (businessDTO = [{}])", businessDTO);
-        Business business = businessService.update(businessMapper.toBusiness(businessDTO));
-        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.toBusinessDTO(business));
+        Business business = businessService.update(businessMapper.convertToEntity(businessDTO));
+        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));
     }
 
     @PutMapping("/user")
@@ -80,11 +80,11 @@ public class BusinessController {
     public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddUserToBusinessDTO addUserToBusinessDTO) {
         log.info("In update (addUserToBusinessDTO = [{}])", addUserToBusinessDTO);
         Business updatedBusiness = businessService.addUserToBusiness(
-                businessMapper.toBusiness(addUserToBusinessDTO),
+                businessMapper.convertToEntity(addUserToBusinessDTO),
                 addUserToBusinessDTO.getEmail()
         );
         Business business = businessService.update(updatedBusiness);
-        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.toBusinessDTO(business));
+        return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));
     }
 
 
