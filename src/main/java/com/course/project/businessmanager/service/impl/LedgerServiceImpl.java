@@ -71,7 +71,7 @@ public class LedgerServiceImpl implements LedgerService {
         object.setDueTime(LocalDateTime.now());
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
-//        transferLedger(object);
+        transferLedger(object);
         return ledgerRepository.save(object);
     }
 
