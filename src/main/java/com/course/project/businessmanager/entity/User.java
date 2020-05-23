@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -63,9 +64,9 @@ public class User implements Serializable {
     private Role role = Role.ROLE_OWNER;
 
     @ManyToMany(mappedBy = "users")
-    @JsonIgnoreProperties(value="users")
     List<Business> businessList = new ArrayList<>();
 
+    @JsonIgnore
     private String token;
 }
 

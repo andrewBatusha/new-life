@@ -2,6 +2,7 @@ package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ public class BusinessDTO {
 
     private String name;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<User> users = new ArrayList<>();
 
     private List<Building> buildings = new ArrayList<>();
