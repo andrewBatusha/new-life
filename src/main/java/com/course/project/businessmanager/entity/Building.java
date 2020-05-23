@@ -48,6 +48,6 @@ public class Building implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_id")
-    @JsonProperty( value = "business", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;
 }

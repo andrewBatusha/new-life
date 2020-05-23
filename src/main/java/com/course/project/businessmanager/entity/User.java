@@ -2,6 +2,7 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,6 +55,7 @@ public class User implements Serializable {
     private String email;
 
     @NotEmpty(message = "Password cannot be empty")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(length = 20, columnDefinition = "varchar(32) default 'ROLE_OWNER'")
