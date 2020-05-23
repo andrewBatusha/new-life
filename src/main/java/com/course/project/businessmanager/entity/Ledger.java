@@ -4,6 +4,7 @@ import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.entity.enums.ProcurementType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -49,6 +50,7 @@ public class Ledger implements Serializable {
 
     @NotNull(message = "Due time cannot be empty")
     @Column(name = "due_time")
+    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime dueTime;
     @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
     @Column(name = "unit_of_measurement")

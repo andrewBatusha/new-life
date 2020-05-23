@@ -105,6 +105,7 @@ public class LedgerServiceImpl implements LedgerService {
      *
      * @param object
      */
+    @Transactional(rollbackFor = Exception.class)
     private void transferLedger(Ledger object) {
         if (object.getProcurementType() == ProcurementType.WAREHOUSE) {
             warehouseService.save(new Warehouse(
