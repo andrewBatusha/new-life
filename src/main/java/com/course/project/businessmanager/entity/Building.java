@@ -3,6 +3,7 @@ package com.course.project.businessmanager.entity;
 import com.course.project.businessmanager.utils.EntityIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,5 +49,6 @@ public class Building implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_id")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;
 }
