@@ -1,0 +1,27 @@
+package com.course.project.businessmanager.repository.impl;
+
+import com.course.project.businessmanager.entity.Equipment;
+import com.course.project.businessmanager.repository.EquipmentRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+@Slf4j
+public class EquipmentRepositoryImpl extends BasicRepositoryImpl<Equipment, UUID> implements EquipmentRepository {
+
+    /**
+     * The method used for getting number of ledgers with some name from database
+     *
+     * @param name String name used to find Ledger
+     * @return Long number of records with name
+     */
+    @Override
+    public Long countEquipmentsWithName(String name) {
+        log.info("In countLedgersWithName(name = [{}])", name);
+        return (Long) getSession().createQuery
+                ("SELECT count (*) FROM Equipment e WHERE e.name = :name")
+                .setParameter("name", name).getSingleResult();
+    }
+}
