@@ -12,8 +12,9 @@ import com.course.project.businessmanager.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,6 +66,7 @@ public class LedgerServiceImpl implements LedgerService {
      * @return saved Ledger entity
      */
     @Override
+    @Transactional(readOnly = true, propagation= Propagation.REQUIRES_NEW)
     public Ledger save(Ledger object) {
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
