@@ -105,7 +105,7 @@ public class LedgerServiceImpl implements LedgerService {
      *
      * @param object
      */
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = true)
     private void transferLedger(Ledger object) {
         if (object.getProcurementType() == ProcurementType.WAREHOUSE) {
             warehouseService.save(new Warehouse(
