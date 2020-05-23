@@ -5,6 +5,7 @@ import com.course.project.businessmanager.entity.enums.ProcurementType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -59,7 +60,7 @@ public class Ledger implements Serializable {
     @Min(1)
     private int price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade= CascadeType.ALL)
     @JoinColumn(name = "buildings_id", nullable = false)
     private Building building;
 
