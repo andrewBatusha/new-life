@@ -13,6 +13,10 @@ public class EquipmentDTO {
 
     private String name;
 
+    private int quantity;
+
+    private int price;
+
     private Employee employee;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

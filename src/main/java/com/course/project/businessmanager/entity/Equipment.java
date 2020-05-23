@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -38,6 +39,12 @@ public class Equipment implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "worker_id")
     private Employee employee;
+
+    @Min(1)
+    private int quantity;
+
+    @Min(1)
+    private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buildings_id", nullable = false)
