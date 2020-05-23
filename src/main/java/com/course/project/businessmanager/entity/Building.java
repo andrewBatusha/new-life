@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,7 @@ import java.util.UUID;
         resolver = EntityIdResolver.class,
         scope=Building.class)
 @ToString(exclude="business")
+@JsonIgnoreProperties(value = { "business" })
 public class Building implements Serializable {
 
     @Id
