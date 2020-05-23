@@ -66,7 +66,7 @@ public class LedgerServiceImpl implements LedgerService {
      * @return saved Ledger entity
      */
     @Override
-    @Transactional(propagation= Propagation.REQUIRES_NEW)
+    @Transactional(propagation=Propagation.REQUIRED)
     public Ledger save(Ledger object) {
         object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
