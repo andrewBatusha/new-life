@@ -20,7 +20,7 @@ public class AddManagerToBuildingDTO {
 
     private String geolocation;
 
-    private List<Equipment> equipment = new ArrayList<>();
+    private List<Equipment> equipments = new ArrayList<>();
 
     private List<Ledger> ledgers = new ArrayList<>();
 

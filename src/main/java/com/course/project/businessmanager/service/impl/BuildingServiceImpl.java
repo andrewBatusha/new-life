@@ -1,11 +1,8 @@
 package com.course.project.businessmanager.service.impl;
 
 import com.course.project.businessmanager.entity.Building;
-import com.course.project.businessmanager.entity.Business;
 import com.course.project.businessmanager.entity.User;
-import com.course.project.businessmanager.entity.enums.Role;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
-import com.course.project.businessmanager.exception.FieldAlreadyExistsException;
 import com.course.project.businessmanager.repository.BuildingRepository;
 import com.course.project.businessmanager.service.BuildingService;
 import com.course.project.businessmanager.service.UserService;
@@ -53,6 +50,20 @@ public class BuildingServiceImpl implements BuildingService {
     public List<Building> getAll() {
         log.info("In getAll()");
         return buildingRepository.getAll();
+    }
+
+    /**
+     * The method used for getting building id by email from database
+     *
+     * @param email String email used to find building uuid by it
+     * @return UUID entity
+     */
+    @Override
+    public Building findBuildingByEmail(String email) {
+        log.info("Enter into findByToken method with email:{}", email);
+        return buildingRepository.findBuildingByEmail(email).orElseThrow(
+                () -> new EntityNotFoundException(User.class, "email", email)
+        );
     }
 
     @Override

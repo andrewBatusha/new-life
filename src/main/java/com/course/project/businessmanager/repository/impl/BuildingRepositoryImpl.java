@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -54,4 +56,22 @@ public class BuildingRepositoryImpl extends BasicRepositoryImpl<Building, UUID> 
         getSession().update(entity);
         return entity;
     }
+    /**
+     * The method used for getting Building id by user email from database
+     *
+     * @param email String email used to find Building by it
+     * @return UUID
+     */
+    @Override
+    public Optional<Building> findBuildingByEmail(String email) {
+        log.info("Enter into findBuildingIdByEmail  with email:{}", email);
+        TypedQuery<Building> query = getSession().createNamedQuery("findBuildingId", Building.class).setMaxResults(1);
+        query.setParameter("email", email);
+        List<Building> buildings = query.getResultList();
+        if (buildings.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList().get(0));
+    }
+
 }

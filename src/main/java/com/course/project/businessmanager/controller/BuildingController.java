@@ -2,7 +2,6 @@ package com.course.project.businessmanager.controller;
 
 
 import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
-import com.course.project.businessmanager.dto.BaseBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.mapper.BuildingMapper;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class BuildingController {
 
     @GetMapping
     @ApiOperation(value = "Get the list of all buildings")
-    public ResponseEntity<List<BaseBuildingDTO>> list() {
+    public ResponseEntity<List<BuildingDTO>> list() {
         log.info("Enter into list of BuildingController");
         return ResponseEntity.ok().body(buildingMapper.convertToDtoList(buildingService.getAll()));
     }
@@ -72,6 +72,14 @@ public class BuildingController {
     public ResponseEntity<BuildingDTO> get(@PathVariable("id") UUID id){
         log.info("In get(id = [{}])", id);
         Building building = buildingService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));
+    }
+
+    @GetMapping("/manager")
+    @ApiOperation(value = "Get building info by email")
+    public ResponseEntity<BuildingDTO> getBuildingByEmail(@RequestParam String email){
+        log.info("In getBuildingByEmail(email = [{}])", email);
+        Building building = buildingService.findBuildingByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));
     }
 
