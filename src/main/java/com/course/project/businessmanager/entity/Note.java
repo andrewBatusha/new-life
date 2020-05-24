@@ -37,7 +37,7 @@ import java.util.UUID;
 public class Note implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private UUID id;
 
     @Column(length = 100)
