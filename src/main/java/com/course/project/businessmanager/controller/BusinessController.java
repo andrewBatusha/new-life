@@ -75,7 +75,7 @@ public class BusinessController {
         return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));
     }
 
-    @PutMapping("/user")
+    @PostMapping("/user")
     @ApiOperation(value = "Add user to existing business")
     public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO) {
         log.info("In update (addUserToBusinessDTO = [{}])", addOwnerToBusinessDTO);

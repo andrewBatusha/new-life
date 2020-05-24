@@ -46,7 +46,7 @@ public class BuildingController {
         return ResponseEntity.ok().body(buildingMapper.convertToDtoList(buildingService.getAll()));
     }
 
-    @PutMapping("/user")
+    @PostMapping("/user")
     @ApiOperation(value = "Add user to existing building")
     public ResponseEntity<BuildingDTO> addUserToBuilding(@RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO) {
         log.info("In addUserToBusiness (addManagerToBuildingDTO = [{}])", addManagerToBuildingDTO);
