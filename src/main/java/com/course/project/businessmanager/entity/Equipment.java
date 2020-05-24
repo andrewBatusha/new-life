@@ -41,10 +41,10 @@ public class Equipment implements Serializable {
     private Employee employee;
 
     @Min(1)
-    private int quantity;
+    private Long quantity;
 
     @Min(1)
-    private int price;
+    private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buildings_id", nullable = false)

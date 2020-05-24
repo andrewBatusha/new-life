@@ -5,4 +5,5 @@ import com.course.project.businessmanager.entity.Note;
 import java.util.UUID;
 
 public interface NoteRepository extends BasicRepository<Note, UUID> {
+    Long countNoteWithName(String name, String email);
 }

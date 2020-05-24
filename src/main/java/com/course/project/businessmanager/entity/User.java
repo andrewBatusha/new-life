@@ -18,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -65,9 +66,12 @@ public class User implements Serializable {
     private Role role = Role.ROLE_OWNER;
 
     @ManyToMany(mappedBy = "users")
-    List<Business> businessList = new ArrayList<>();
+    private List<Business> businessList = new ArrayList<>();
 
     @JsonIgnore
     private String token;
+
+    @OneToMany(mappedBy = "user")
+    private List<Note> notes = new ArrayList<>();
 }
 

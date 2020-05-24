@@ -20,7 +20,6 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -204,7 +203,7 @@ public class UserServiceImpl implements UserService {
                     .build();
             String password = pwdGenerator.generate(15);
             String token = UUID.randomUUID().toString();
-            user = new User(null, email, password, Role.ROLE_MANAGER, Collections.emptyList(), token);
+            user = new User(null, email, password, Role.ROLE_MANAGER, Collections.emptyList(), token, Collections.emptyList());
             save(user);
 
             String registrationMessage = "Hello, " + user.getEmail() + ".\n" +

@@ -11,9 +11,7 @@ import com.course.project.businessmanager.service.LedgerService;
 import com.course.project.businessmanager.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.common.util.JsonDateDeserializer;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -70,7 +68,6 @@ public class LedgerServiceImpl implements LedgerService {
     @Override
     public Ledger save(Ledger object) {
         object.setDueTime(LocalDateTime.now());
-        object.setPrice(object.getQuantity() * object.getPrice());
         log.info("In save(entity = [{}]", object);
         transferLedger(object);
         return ledgerRepository.save(object);

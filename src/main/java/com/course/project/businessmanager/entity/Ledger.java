@@ -17,10 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -39,7 +35,7 @@ public class Ledger implements Serializable {
     private String name;
 
 
-    private int quantity;
+    private Long quantity;
 
     @Enumerated(EnumType.STRING)
     private Bookkeeping bookkeeping;
@@ -56,7 +52,7 @@ public class Ledger implements Serializable {
     @Column(name = "unit_of_measurement")
     private String unitOfMeasurement;
 
-    private int price;
+    private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "buildings_id", nullable = false)

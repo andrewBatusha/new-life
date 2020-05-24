@@ -41,7 +41,7 @@ public class Warehouse implements Serializable {
     private String name;
 
     @Min(1)
-    private int quantity;
+    private Long quantity;
 
     @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
     @Column(name = "unit_of_measurement")
