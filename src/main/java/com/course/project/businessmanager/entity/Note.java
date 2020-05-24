@@ -2,7 +2,6 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.NoteStatus;
 import com.course.project.businessmanager.entity.enums.Priority;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,7 +24,6 @@ import java.util.UUID;
 @Entity
 @Data
 @Table(name = "notes")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Note implements Serializable {
 
     @Id

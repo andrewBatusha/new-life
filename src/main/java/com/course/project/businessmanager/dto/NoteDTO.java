@@ -32,6 +32,6 @@ public class NoteDTO {
 
     private NoteStatus noteStatus;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private User user;
 }

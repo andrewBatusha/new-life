@@ -3,8 +3,11 @@ package com.course.project.businessmanager.controller;
 
 import com.course.project.businessmanager.dto.NoteDTO;
 import com.course.project.businessmanager.entity.Note;
+import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.mapper.NoteMapper;
+import com.course.project.businessmanager.security.jwt.JwtTokenProvider;
 import com.course.project.businessmanager.service.NoteService;
+import com.course.project.businessmanager.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
@@ -32,11 +36,15 @@ public class NoteController {
 
     private final NoteService noteService;
     private final NoteMapper noteMapper;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final UserService userService;
 
     @Autowired
-    public NoteController(NoteService noteService, NoteMapper noteMapper) {
+    public NoteController(NoteService noteService, NoteMapper noteMapper, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.noteService = noteService;
         this.noteMapper = noteMapper;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -49,10 +57,15 @@ public class NoteController {
 
     @PostMapping
     @ApiOperation(value = "Create new note")
-    public ResponseEntity<NoteDTO> save(@Valid @RequestBody NoteDTO noteDTO) {
+    public ResponseEntity<NoteDTO> save(@Valid @RequestBody NoteDTO noteDTO, HttpServletRequest req) {
         log.info("Enter into save of NoteController with noteDTO: {}", noteDTO);
-        Note note = noteService.save(noteMapper.convertToEntity(noteDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(noteMapper.convertToDto(note));
+        String token = jwtTokenProvider.resolveToken(req);
+        String email = jwtTokenProvider.getUsername(token);
+        User user = userService.findByEmail(email);
+        Note note = noteMapper.convertToEntity(noteDTO);
+        note.setUser(user);
+        Note noteWithUser = noteService.save(note);
+        return ResponseEntity.status(HttpStatus.CREATED).body(noteMapper.convertToDto(noteWithUser));
     }
 
     @GetMapping("/{id}")
