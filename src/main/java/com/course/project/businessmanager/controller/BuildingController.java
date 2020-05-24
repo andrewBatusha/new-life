@@ -4,9 +4,11 @@ package com.course.project.businessmanager.controller;
 import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
+import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.mapper.BuildingMapper;
 import com.course.project.businessmanager.security.jwt.JwtTokenProvider;
 import com.course.project.businessmanager.service.BuildingService;
+import com.course.project.businessmanager.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -34,11 +36,15 @@ public class BuildingController {
 
     private final BuildingService buildingService;
     private final BuildingMapper buildingMapper;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final UserService userService;
 
     @Autowired
-    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper) {
+    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper, JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.buildingService = buildingService;
         this.buildingMapper = buildingMapper;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -62,10 +68,15 @@ public class BuildingController {
 
     @PostMapping
     @ApiOperation(value = "Create new building")
-    public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO) {
+    public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO, HttpServletRequest req) {
         log.info("Enter into save of BuildingController with buildingDTO: {}", buildingDTO);
-        Building building = buildingService.save(buildingMapper.convertToEntity(buildingDTO));
-        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(building));
+        String token = jwtTokenProvider.resolveToken(req);
+        String username = jwtTokenProvider.getUsername(token);
+        User user = userService.findByEmail(username);
+        Building building = buildingMapper.convertToEntity(buildingDTO);
+        building.setUser(user);
+        Building newBuilding = buildingService.save(building);
+        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(newBuilding));
     }
 
     @GetMapping("/{id}")
