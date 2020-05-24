@@ -4,7 +4,6 @@ import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.entity.enums.ProcurementType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -28,8 +27,7 @@ import java.util.UUID;
 @Table(name = "ledgers")
 public class Ledger implements Serializable {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
 

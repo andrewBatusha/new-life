@@ -3,7 +3,6 @@ package com.course.project.businessmanager.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,8 +32,7 @@ import java.util.UUID;
 public class Warehouse implements Serializable {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @NotEmpty(message = "Name cannot be empty")
