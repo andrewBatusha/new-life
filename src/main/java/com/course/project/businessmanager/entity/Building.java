@@ -29,7 +29,7 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findBuildingByEmail",
-        query = "from Building b " +
+        query = "select b from Building b " +
                 "join b.user u where u.email= :email"
 )
 @Entity
