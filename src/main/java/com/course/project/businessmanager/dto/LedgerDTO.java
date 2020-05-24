@@ -30,7 +30,7 @@ public class LedgerDTO {
     private String name;
 
     @Min(1)
-    private int quantity;
+    private Long quantity;
 
     private Bookkeeping bookkeeping;
 
@@ -43,7 +43,7 @@ public class LedgerDTO {
     private String unitOfMeasurement;
 
     @Min(1)
-    private int price;
+    private Long price;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Building building;
