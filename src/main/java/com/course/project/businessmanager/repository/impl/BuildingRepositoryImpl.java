@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.repository.impl;
 
 import com.course.project.businessmanager.entity.Building;
+import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.repository.BuildingRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
@@ -38,5 +39,19 @@ public class BuildingRepositoryImpl extends BasicRepositoryImpl<Building, UUID> 
         return (Long) getSession().createQuery
                 ("SELECT count (*) FROM Building b WHERE b.name = :name")
                 .setParameter("name", name).getSingleResult();
+    }
+
+    /**
+     * Modified update method, which merge entity before updating it
+     *
+     * @param entity user is going to be updated
+     * @return User
+     */
+    @Override
+    public Building update(Building entity) {
+        log.info("Enter into update method with entity:{}", entity);
+        entity = (Building) getSession().merge(entity);
+        getSession().update(entity);
+        return entity;
     }
 }

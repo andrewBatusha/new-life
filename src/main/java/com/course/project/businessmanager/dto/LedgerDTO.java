@@ -37,7 +37,6 @@ public class LedgerDTO {
     private ProcurementType procurementType;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm", lenient = OptBoolean.FALSE)
-    @NotNull(message = "Due time cannot be empty")
     private LocalDateTime dueTime;
 
     @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
