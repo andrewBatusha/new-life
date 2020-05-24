@@ -34,12 +34,11 @@ public class Ledger implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
+
     @Column(length = 35, nullable = false)
     private String name;
 
-    @Min(1)
+
     private int quantity;
 
     @Enumerated(EnumType.STRING)
@@ -48,15 +47,15 @@ public class Ledger implements Serializable {
     @Enumerated(EnumType.STRING)
     private ProcurementType procurementType;
 
-    @NotNull(message = "Due time cannot be empty")
+
     @Column(name = "due_time")
     @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime dueTime;
-    @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
+
+
     @Column(name = "unit_of_measurement")
     private String unitOfMeasurement;
 
-    @Min(1)
     private int price;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -47,7 +48,7 @@ public class LedgerController {
 
     @PostMapping
     @ApiOperation(value = "Create new ledger")
-    public ResponseEntity<LedgerDTO> save(@RequestBody LedgerDTO ledgerDTO) {
+    public ResponseEntity<LedgerDTO> save(@Valid @RequestBody LedgerDTO ledgerDTO) {
         log.info("Enter into save of LedgerController with ledgerDTO: {}", ledgerDTO);
         Ledger ledger = ledgerService.save(ledgerMapper.convertToEntity(ledgerDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(ledgerMapper.convertToDto(ledger));
@@ -63,7 +64,7 @@ public class LedgerController {
 
     @PutMapping
     @ApiOperation(value = "Update existing ledger by id")
-    public ResponseEntity<LedgerDTO> update(@RequestBody LedgerDTO ledgerDTO) {
+    public ResponseEntity<LedgerDTO> update(@Valid @RequestBody LedgerDTO ledgerDTO) {
         log.info("In update (ledgerDTO = [{}])", ledgerDTO);
         Ledger ledger = ledgerService.update(ledgerMapper.convertToEntity(ledgerDTO));
         return ResponseEntity.status(HttpStatus.OK).body(ledgerMapper.convertToDto(ledger));
