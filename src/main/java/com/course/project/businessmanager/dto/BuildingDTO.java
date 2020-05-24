@@ -26,7 +26,6 @@ public class BuildingDTO {
 
     private List<Warehouse> warehouses = new ArrayList<>();
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Business business;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
