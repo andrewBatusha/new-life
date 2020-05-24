@@ -2,7 +2,11 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.NoteStatus;
 import com.course.project.businessmanager.entity.enums.Priority;
+import com.course.project.businessmanager.utils.EntityIdResolver;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -23,6 +27,12 @@ import java.util.UUID;
 
 @Entity
 @Data
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id",
+        resolver = EntityIdResolver.class,
+        scope=Building.class)
+@ToString(exclude={"user"})
 @Table(name = "notes")
 public class Note implements Serializable {
 
@@ -47,7 +57,7 @@ public class Note implements Serializable {
     @Enumerated(EnumType.STRING)
     private NoteStatus noteStatus;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
