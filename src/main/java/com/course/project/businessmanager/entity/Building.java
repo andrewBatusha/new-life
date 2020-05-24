@@ -35,7 +35,7 @@ import java.util.UUID;
         property = "id",
         resolver = EntityIdResolver.class,
         scope=Building.class)
-@ToString(exclude={"business", "equipments", "ledgers"})
+@ToString(exclude={"business", "equipments", "ledgers", "warehouses"})
 @JsonIgnoreProperties(value = { "business" })
 public class Building implements Serializable {
 
