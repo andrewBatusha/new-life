@@ -2,6 +2,7 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -44,6 +45,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @Table(name = "users")
+@JsonIgnoreProperties({"businessList"})
 public class User implements Serializable {
 
     @Id
