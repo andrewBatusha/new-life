@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Business;
+import com.course.project.businessmanager.entity.Note;
 import com.course.project.businessmanager.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -25,5 +26,7 @@ public class UserDTO {
     private Role role;
 
     List<Business> businessList = new ArrayList<>();
+
+    private List<Note> notes = new ArrayList<>();
 }
 
