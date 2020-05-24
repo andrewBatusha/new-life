@@ -65,7 +65,7 @@ public class BuildingRepositoryImpl extends BasicRepositoryImpl<Building, UUID> 
     @Override
     public Optional<Building> findBuildingByEmail(String email) {
         log.info("Enter into findBuildingIdByEmail  with email:{}", email);
-        TypedQuery<Building> query = getSession().createNamedQuery("findBuildingId", Building.class).setMaxResults(1);
+        TypedQuery<Building> query = getSession().createNamedQuery("findBuildingByEmail", Building.class).setMaxResults(1);
         query.setParameter("email", email);
         List<Building> buildings = query.getResultList();
         if (buildings.isEmpty()) {
