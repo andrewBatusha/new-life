@@ -4,11 +4,8 @@ package com.course.project.businessmanager.controller;
 import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
-import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.mapper.BuildingMapper;
-import com.course.project.businessmanager.security.jwt.JwtTokenProvider;
 import com.course.project.businessmanager.service.BuildingService;
-import com.course.project.businessmanager.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,15 +32,11 @@ public class BuildingController {
 
     private final BuildingService buildingService;
     private final BuildingMapper buildingMapper;
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
 
     @Autowired
-    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper, JwtTokenProvider jwtTokenProvider, UserService userService) {
+    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper) {
         this.buildingService = buildingService;
         this.buildingMapper = buildingMapper;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.userService = userService;
     }
 
     @GetMapping
@@ -68,15 +60,10 @@ public class BuildingController {
 
     @PostMapping
     @ApiOperation(value = "Create new building")
-    public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO, HttpServletRequest req) {
+    public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO) {
         log.info("Enter into save of BuildingController with buildingDTO: {}", buildingDTO);
-        String token = jwtTokenProvider.resolveToken(req);
-        String username = jwtTokenProvider.getUsername(token);
-        User user = userService.findByEmail(username);
-        Building building = buildingMapper.convertToEntity(buildingDTO);
-        building.setUser(user);
-        Building newBuilding = buildingService.save(building);
-        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(newBuilding));
+        Building building = buildingService.save(buildingMapper.convertToEntity(buildingDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(building));
     }
 
     @GetMapping("/{id}")
