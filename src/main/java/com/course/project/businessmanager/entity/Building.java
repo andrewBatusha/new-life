@@ -35,7 +35,7 @@ import java.util.UUID;
         property = "id",
         resolver = EntityIdResolver.class,
         scope=Building.class)
-@ToString(exclude="business")
+@ToString(exclude={"business", "equipments"})
 @JsonIgnoreProperties(value = { "business" })
 public class Building implements Serializable {
 
@@ -55,7 +55,7 @@ public class Building implements Serializable {
     private Business business;
 
     @OneToMany(mappedBy = "building")
-    private List<Equipment> equipment = new ArrayList<>();
+    private List<Equipment> equipments = new ArrayList<>();
 
     @OneToMany(mappedBy = "building")
     private List<Ledger> ledgers = new ArrayList<>();
