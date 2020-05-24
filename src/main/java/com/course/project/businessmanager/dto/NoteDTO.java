@@ -4,6 +4,7 @@ import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.entity.enums.NoteStatus;
 import com.course.project.businessmanager.entity.enums.Priority;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.OptBoolean;
 import lombok.Data;
@@ -32,6 +33,6 @@ public class NoteDTO {
 
     private NoteStatus noteStatus;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonIgnore
     private User user;
 }
