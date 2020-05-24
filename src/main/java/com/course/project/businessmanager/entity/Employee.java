@@ -3,6 +3,7 @@ package com.course.project.businessmanager.entity;
 import com.course.project.businessmanager.entity.enums.TimeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.Column;
@@ -31,7 +32,8 @@ import java.util.UUID;
 public class Employee implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private UUID id;
 
     @NotEmpty(message = "Name cannot be empty")

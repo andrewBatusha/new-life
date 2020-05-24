@@ -2,6 +2,7 @@ package com.course.project.businessmanager.entity;
 
 import lombok.Data;
 import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +20,8 @@ import java.util.UUID;
 @Table(name = "positions")
 public class Position implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private UUID id;
 
     @NotEmpty(message = "Name cannot be empty")
