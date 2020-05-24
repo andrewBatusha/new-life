@@ -4,6 +4,7 @@ import com.course.project.businessmanager.entity.enums.NoteStatus;
 import com.course.project.businessmanager.entity.enums.Priority;
 import com.course.project.businessmanager.utils.EntityIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.ToString;
@@ -29,6 +30,7 @@ import java.util.UUID;
 @Data
 @ToString(exclude={"user"})
 @Table(name = "notes")
+@JsonIgnoreProperties({"user"})
 public class Note implements Serializable {
 
     @Id
