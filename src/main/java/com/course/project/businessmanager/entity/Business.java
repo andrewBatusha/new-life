@@ -60,7 +60,7 @@ public class Business implements Serializable {
     )
     private List<User> users = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "business")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "business", cascade = CascadeType.MERGE)
     private List<Building> buildings = new ArrayList<>();
 
 }
