@@ -34,13 +34,11 @@ public class BuildingController {
 
     private final BuildingService buildingService;
     private final BuildingMapper buildingMapper;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper, JwtTokenProvider jwtTokenProvider) {
+    public BuildingController(BuildingService buildingService, BuildingMapper buildingMapper) {
         this.buildingService = buildingService;
         this.buildingMapper = buildingMapper;
-        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @GetMapping
@@ -52,13 +50,11 @@ public class BuildingController {
 
     @PutMapping("/user")
     @ApiOperation(value = "Add user to existing building")
-    public ResponseEntity<BuildingDTO> addUserToBuilding(@RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO, HttpServletRequest req) {
+    public ResponseEntity<BuildingDTO> addUserToBuilding(@RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO) {
         log.info("In addUserToBusiness (addManagerToBuildingDTO = [{}])", addManagerToBuildingDTO);
-        String token = jwtTokenProvider.resolveToken(req);
-        String username = jwtTokenProvider.getUsername(token);
         Building updatedBuilding = buildingService.addUserToBuilding(
                 buildingMapper.convertToEntity(addManagerToBuildingDTO),
-                username
+                addManagerToBuildingDTO.getEmail()
         );
         Building building = buildingService.update(updatedBuilding);
         return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));

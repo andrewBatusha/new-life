@@ -77,13 +77,11 @@ public class BusinessController {
 
     @PutMapping("/user")
     @ApiOperation(value = "Add user to existing business")
-    public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO, HttpServletRequest req) {
+    public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO) {
         log.info("In update (addUserToBusinessDTO = [{}])", addOwnerToBusinessDTO);
-        String token = jwtTokenProvider.resolveToken(req);
-        String username = jwtTokenProvider.getUsername(token);
         Business updatedBusiness = businessService.addUserToBusiness(
                 businessMapper.convertToEntity(addOwnerToBusinessDTO),
-                username
+                addOwnerToBusinessDTO.getEmail()
         );
         Business business = businessService.update(updatedBusiness);
         return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));

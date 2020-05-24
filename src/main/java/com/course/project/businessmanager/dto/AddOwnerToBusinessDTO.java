@@ -17,4 +17,6 @@ public class AddOwnerToBusinessDTO {
     private List<User> users = new ArrayList<>();
 
     private List<Building> buildings = new ArrayList<>();
+
+    private String email;
 }

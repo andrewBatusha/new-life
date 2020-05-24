@@ -31,4 +31,6 @@ public class AddManagerToBuildingDTO {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User user;
+
+    private String email;
 }
