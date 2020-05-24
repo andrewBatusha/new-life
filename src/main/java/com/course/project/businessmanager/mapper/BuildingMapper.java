@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.mapper;
 
 import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
+import com.course.project.businessmanager.dto.BaseBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
 import org.mapstruct.Mapper;
@@ -13,8 +14,8 @@ public interface BuildingMapper {
 
     Building convertToEntity(BuildingDTO buildingDTO);
 
-    Building convertToEntity(AddManagerToBuildingDTO AddManagerToBuildingDTO);
+    Building convertToEntity(AddManagerToBuildingDTO addManagerToBuildingDTO);
 
-    List<BuildingDTO> convertToDtoList(List<Building> buildings);
+    List<BaseBuildingDTO> convertToDtoList(List<Building> buildings);
 
 }

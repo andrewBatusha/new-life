@@ -72,9 +72,6 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public Building save(Building object) {
         log.info("In save(entity = [{}]", object);
-        if (isBuildingExistsWithTitle(object.getName())) {
-            throw new FieldAlreadyExistsException(Building.class, "title", object.getName());
-        }
         return buildingRepository.save(object);
     }
 

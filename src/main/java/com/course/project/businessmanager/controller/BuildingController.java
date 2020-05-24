@@ -2,6 +2,7 @@ package com.course.project.businessmanager.controller;
 
 
 import com.course.project.businessmanager.dto.AddManagerToBuildingDTO;
+import com.course.project.businessmanager.dto.BaseBuildingDTO;
 import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.mapper.BuildingMapper;
@@ -41,7 +42,7 @@ public class BuildingController {
 
     @GetMapping
     @ApiOperation(value = "Get the list of all buildings")
-    public ResponseEntity<List<BuildingDTO>> list() {
+    public ResponseEntity<List<BaseBuildingDTO>> list() {
         log.info("Enter into list of BuildingController");
         return ResponseEntity.ok().body(buildingMapper.convertToDtoList(buildingService.getAll()));
     }
