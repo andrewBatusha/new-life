@@ -2,10 +2,7 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.NoteStatus;
 import com.course.project.businessmanager.entity.enums.Priority;
-import com.course.project.businessmanager.utils.EntityIdResolver;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
