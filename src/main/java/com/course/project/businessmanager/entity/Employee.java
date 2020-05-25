@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -24,6 +25,12 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
+
+@NamedQuery(
+        name = "findEmployeesByBoss",
+        query = "select e from Employee e" +
+                "join e.position p where p.employee.email = :email"
+)
 @Entity
 @NoArgsConstructor
 @Data
@@ -71,7 +78,7 @@ public class Employee implements Serializable {
     private int salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buildings_id")
+    @JoinColumn(name = "building_id")
     private Building building;
 
 }

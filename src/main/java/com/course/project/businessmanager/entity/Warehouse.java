@@ -48,6 +48,6 @@ public class Warehouse implements Serializable {
     private String unitOfMeasurement;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "buildings_id", nullable = false)
+    @JoinColumn(name = "building_id", nullable = false)
     private Building building;
 }

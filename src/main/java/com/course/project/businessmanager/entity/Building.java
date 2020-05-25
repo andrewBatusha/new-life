@@ -69,6 +69,9 @@ public class Building implements Serializable {
     @OneToMany(mappedBy = "building")
     private List<Warehouse> warehouses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "building")
+    private List<Employee> employees = new ArrayList<>();
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;

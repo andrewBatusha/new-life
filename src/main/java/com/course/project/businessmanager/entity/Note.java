@@ -43,7 +43,6 @@ public class Note implements Serializable {
     @Column(length = 250, nullable = false)
     private String body;
 
-    @NotNull(message = "Due time cannot be empty")
     @Column(name = "due_time")
     @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime dueTime;
