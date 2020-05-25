@@ -28,7 +28,7 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findEmployeesByBoss",
-        query = "select e from Employee e" +
+        query = "select e from Employee e " +
                 "join e.position p where p.employee.email = :email"
 )
 @Entity
