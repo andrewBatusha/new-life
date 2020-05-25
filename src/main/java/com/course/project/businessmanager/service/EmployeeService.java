@@ -9,4 +9,6 @@ public interface EmployeeService extends BasicService<Employee, UUID> {
     boolean isEmployeeExistsWithEmail(String email);
     Long getNumberOfEmployeesByBossEmail(String email);
     List<Employee> getEmployeesByBossEmail(String email);
+    List<Employee> performEmployeesBranch(String email);
+    Employee getBoss(String id);
 }

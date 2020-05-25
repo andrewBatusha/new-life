@@ -25,11 +25,29 @@ public class EmployeeRepositoryImpl extends BasicRepositoryImpl<Employee, UUID> 
         log.info("Enter into findEmployeesByBossEmail  with email:{}", email);
         TypedQuery<Employee> query = getSession().createNamedQuery("findEmployeesByBoss", Employee.class);
         query.setParameter("email", email);
-        List<Employee> buildings = query.getResultList();
-        if (buildings.isEmpty()) {
+        List<Employee> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
             return Optional.empty();
         }
         return Optional.of(query.getResultList());
+    }
+
+    /**
+     * The method used for getting boss info by their owner email from database
+     *
+     * @param id String email used to find employees by it
+     * @return UUID
+     */
+    @Override
+    public Optional<Employee> findBoss(String id) {
+        log.info("Enter into findBoss  with email:{}", id);
+        TypedQuery<Employee> query = getSession().createNamedQuery("findBoss", Employee.class);
+        query.setParameter("email", id);
+        List<Employee> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList().get(0));
     }
 
     /**

@@ -27,16 +27,16 @@ public class BusinessRepositoryImpl extends BasicRepositoryImpl<Business, UUID> 
     }
 
     /**
-     * The method used for getting number of businesses with name from database
+     * The method used for getting number of businesses with uuid from database
      *
-     * @param name String name used to find business
-     * @return Long number of records with name
+     * @param uuid String uuid used to find business
+     * @return Long number of records with uuid
      */
     @Override
-    public Long countBusinessWithName(String name) {
-        log.info("In countBusinessWithName(name = [{}])", name);
+    public Long countBusinessWithId(String uuid) {
+        log.info("In countBusinessWithName(uuid = [{}])", uuid);
         return (Long) getSession().createQuery
-                ("SELECT count (*) FROM Business b WHERE b.name = :name")
-                .setParameter("name", name).getSingleResult();
+                ("SELECT count (*) FROM Business b WHERE b.id = :uuid")
+                .setParameter("uuid", uuid).getSingleResult();
     }
 }

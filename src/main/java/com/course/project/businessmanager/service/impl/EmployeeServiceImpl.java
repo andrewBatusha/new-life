@@ -128,4 +128,32 @@ public class EmployeeServiceImpl implements EmployeeService {
                 () -> new EntityNotFoundException(Employee.class, "email", email)
         );
     }
+
+    /**
+     * Method gets information about all employees by boss email from Repository
+     *
+     * @return List of employees
+     */
+    @Override
+    public List<Employee> performEmployeesBranch(String email) {
+        log.info("In performEmployeesBranch(email = [{}])", email);
+        List<Employee> employees = getEmployeesByBossEmail(email);
+        for(Employee e : employees){
+            e.getPosition().setNumberOfSubordinate(getNumberOfEmployeesByBossEmail(e.getEmail()));
+        }
+        return employees;
+    }
+
+    /**
+     * Method gets information about boss from Repository
+     *
+     * @return Head Employee
+     */
+    @Override
+    public Employee getBoss(String id) {
+        log.info("In getBoss(id = [{}])", id);
+        return employeeRepository.findBoss(id).orElseThrow(
+                () -> new EntityNotFoundException(Employee.class, "id", id));
+    }
+
 }

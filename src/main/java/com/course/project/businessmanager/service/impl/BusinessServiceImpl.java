@@ -75,7 +75,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public Business save(Business object) {
         log.info("In save(entity = [{}]", object);
-        if (isBusinessExistsWithTitle(object.getName())) {
+        if (isBusinessExistsWithId(object.getId().toString())) {
             throw new FieldAlreadyExistsException(Business.class, "title", object.getName());
         }
         return businessRepository.save(object);
@@ -90,7 +90,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public Business update(Business object) {
         log.info("In update(entity = [{}]", object);
-        if (isBusinessExistsWithTitle(object.getName())) {
+        if (isBusinessExistsWithId(object.getId().toString())) {
             return businessRepository.update(object);
         } else {
             throw new EntityNotFoundException(Business.class, "id", String.valueOf(object.getId()));
@@ -112,15 +112,13 @@ public class BusinessServiceImpl implements BusinessService {
     /**
      * Method finds if Business with title already exists
      *
-     * @param title
+     * @param uuid
      * @return true if Business with such title already exist
      */
     @Override
-    public boolean isBusinessExistsWithTitle(String title) {
-        log.info("In isWarehouseExistsWithTitle(title = [{}])", title);
-        return businessRepository.countBusinessWithName(title) != 0;
+    public boolean isBusinessExistsWithId(String uuid) {
+        log.info("In isBusinessExistsWithId(uuid = [{}])", uuid);
+        return businessRepository.countBusinessWithId(uuid) != 0;
     }
-
-
 
 }

@@ -19,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -30,6 +29,12 @@ import java.util.UUID;
         name = "findEmployeesByBoss",
         query = "select e from Employee e " +
                 "join e.position p where p.employee.email = :email"
+)
+@NamedQuery(
+        name = "findBoss",
+        query = "select e from Employee e " +
+                "join e.position p with p.employee.id is null " +
+                "join e.building b with b.business.id = :id"
 )
 @Entity
 @NoArgsConstructor
@@ -74,8 +79,6 @@ public class Employee implements Serializable {
     @NotEmpty(message = "Email cannot be empty")
     private String email;
 
-    @Min(1)
-    private int salary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id")

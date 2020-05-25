@@ -42,7 +42,7 @@ import java.util.UUID;
         resolver = EntityIdResolver.class,
         scope=Building.class)
 @ToString(exclude={"business", "equipments", "ledgers", "warehouses"})
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "business"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Building implements Serializable {
 
     @Id

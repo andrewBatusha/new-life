@@ -5,7 +5,7 @@ import com.course.project.businessmanager.entity.Business;
 import java.util.UUID;
 
 public interface BusinessService extends BasicService<Business, UUID> {
-    boolean isBusinessExistsWithTitle(String title);
+    boolean isBusinessExistsWithId(String title);
 
     Business addUserToBusiness(Business object, String email);
 }

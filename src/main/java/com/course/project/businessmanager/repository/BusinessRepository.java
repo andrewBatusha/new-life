@@ -5,5 +5,5 @@ import com.course.project.businessmanager.entity.Business;
 import java.util.UUID;
 
 public interface BusinessRepository extends BasicRepository<Business, UUID> {
-    Long countBusinessWithName(String title);
+    Long countBusinessWithId(String title);
 }
