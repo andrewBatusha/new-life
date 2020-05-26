@@ -47,6 +47,7 @@ public class EmployeeController {
         log.info("Enter into list of employees by boss email EmployeeController");
         BranchDTO branchDTO = new BranchDTO();
         branchDTO.setEmployees(employeeService.performEmployeesBranch(employeeDTO.getEmail()));
+        employeeDTO.getPosition().setNumberOfSubordinate(employeeService.getNumberOfEmployeesByBossEmail(employeeDTO.getEmail()));
         branchDTO.setBoss(employeeMapper.convertToEntity(employeeDTO));
         return ResponseEntity.ok().body(branchDTO);
     }
