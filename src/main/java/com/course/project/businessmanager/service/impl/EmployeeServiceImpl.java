@@ -150,10 +150,10 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return Head Employee
      */
     @Override
-    public Employee getBoss(String id) {
+    public Employee getBoss(UUID id) {
         log.info("In getBoss(id = [{}])", id);
         return employeeRepository.findBoss(id).orElseThrow(
-                () -> new EntityNotFoundException(Employee.class, "id", id));
+                () -> new EntityNotFoundException(Employee.class, "id", id.toString()));
     }
 
 }

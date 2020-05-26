@@ -1,8 +1,10 @@
 package com.course.project.businessmanager.controller;
 
 import com.course.project.businessmanager.dto.BranchDTO;
+import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.dto.BusinessDTO;
 import com.course.project.businessmanager.dto.EmployeeDTO;
+import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.Employee;
 import com.course.project.businessmanager.mapper.EmployeeMapper;
 import com.course.project.businessmanager.service.EmployeeService;
@@ -51,9 +53,9 @@ public class EmployeeController {
 
     @GetMapping("/head")
     @ApiOperation(value = "Get the list of  employees by boss email")
-    public ResponseEntity<EmployeeDTO> getBoss(@Valid @RequestBody BusinessDTO businessDTO) {
+    public ResponseEntity<EmployeeDTO> getBoss(@Valid @RequestBody BuildingDTO buildingDTO) {
         log.info("Enter into get boss of EmployeeController");
-        Employee employee = employeeService.getBoss(businessDTO.getId().toString());
+        Employee employee = employeeService.getBoss(buildingDTO.getId());
         return ResponseEntity.ok().body(employeeMapper.convertToDto(employee));
     }
 

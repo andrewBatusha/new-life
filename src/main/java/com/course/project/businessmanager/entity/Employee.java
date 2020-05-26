@@ -34,7 +34,7 @@ import java.util.UUID;
         name = "findBoss",
         query = "select e from Employee e " +
                 "join e.position p with p.employee.id is null " +
-                "join e.building b with b.business.id = :id"
+                "join e.building b with b.id = :id"
 )
 @Entity
 @NoArgsConstructor

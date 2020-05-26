@@ -10,5 +10,5 @@ public interface EmployeeRepository extends BasicRepository<Employee, UUID> {
     Optional<List<Employee>> findEmployeesByBossEmail(String email);
     Long countEmployeesByBossEmail(String email);
     Long countEmployeeWithEmail(String email);
-    Optional<Employee> findBoss(String id);
+    Optional<Employee> findBoss(UUID id);
 }

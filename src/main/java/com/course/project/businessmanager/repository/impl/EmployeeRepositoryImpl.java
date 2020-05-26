@@ -39,10 +39,10 @@ public class EmployeeRepositoryImpl extends BasicRepositoryImpl<Employee, UUID> 
      * @return UUID
      */
     @Override
-    public Optional<Employee> findBoss(String id) {
+    public Optional<Employee> findBoss(UUID id) {
         log.info("Enter into findBoss  with email:{}", id);
         TypedQuery<Employee> query = getSession().createNamedQuery("findBoss", Employee.class);
-        query.setParameter("email", id);
+        query.setParameter("id", id);
         List<Employee> resultList = query.getResultList();
         if (resultList.isEmpty()) {
             return Optional.empty();
