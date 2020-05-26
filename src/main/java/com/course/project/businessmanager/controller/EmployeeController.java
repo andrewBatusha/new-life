@@ -41,7 +41,7 @@ public class EmployeeController {
         this.employeeMapper = employeeMapper;
     }
 
-    @GetMapping
+    @PutMapping("/branch")
     @ApiOperation(value = "Get the list of  employees by boss email")
     public ResponseEntity<BranchDTO> getEmployeesByBossEmail(@Valid @RequestBody EmployeeDTO employeeDTO) {
         log.info("Enter into list of employees by boss email EmployeeController");
