@@ -52,11 +52,7 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotNull
-    @Email
-    @Size(min = 5, max = 40)
     @Column(unique = true, length = 40)
-    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
     @NotEmpty(message = "Password cannot be empty")

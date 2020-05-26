@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import static com.course.project.businessmanager.service.impl.UserServiceImpl.PASSWORD_FOR_SOCIAL_USER;
 
@@ -52,7 +53,7 @@ public class AuthenticationController {
 
     @PostMapping("/sign-in")
     @ApiOperation(value = "Get credentials  for login")
-    public ResponseEntity signIn(@RequestBody AuthenticationRequestDTO requestDto) {
+    public ResponseEntity signIn(@Valid @RequestBody AuthenticationRequestDTO requestDto) {
         log.info("Enter into signIn method with user email {}", requestDto.getEmail());
         User user = userService.findSocialUser(requestDto.getEmail()).orElseThrow(() ->
                 new BadCredentialsException("Invalid password or email")
@@ -69,7 +70,7 @@ public class AuthenticationController {
 
     @PostMapping("/sign-up")
     @ApiOperation(value = "Get credentials for registration")
-    public ResponseEntity<MessageDTO> signUp(@RequestBody RegistrationRequestDTO registrationDTO) {
+    public ResponseEntity<MessageDTO> signUp(@Valid @RequestBody RegistrationRequestDTO registrationDTO) {
         log.info("Enter into signUp method with user email {}", registrationDTO.getEmail());
         User user = userMapper.toCreateUser(registrationDTO);
         User createUser = userService.registration(user);

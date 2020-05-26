@@ -25,8 +25,6 @@ public class Position implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String name;
 
@@ -34,7 +32,6 @@ public class Position implements Serializable {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Min(1)
     private Long salary;
 
     private Long numberOfSubordinate;

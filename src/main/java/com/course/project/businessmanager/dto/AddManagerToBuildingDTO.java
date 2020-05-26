@@ -8,6 +8,7 @@ import com.course.project.businessmanager.entity.Warehouse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,5 +33,6 @@ public class AddManagerToBuildingDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private User user;
 
+    @Email
     private String email;
 }

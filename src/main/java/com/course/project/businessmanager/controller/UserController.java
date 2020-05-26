@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -77,7 +78,7 @@ public class UserController {
 
     @PostMapping
     @ApiOperation(value = "Create new user")
-    public ResponseEntity<UserCreateDTO> save(@RequestBody UserCreateDTO createUserDTO) {
+    public ResponseEntity<UserCreateDTO> save(@Valid @RequestBody UserCreateDTO createUserDTO) {
         log.info("Enter into save method with createUserDTO: {}", createUserDTO);
         User user = userService.save(userMapper.toUser(createUserDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(userMapper.toUserCreateDTO(user));
@@ -86,7 +87,7 @@ public class UserController {
 
     @PutMapping
     @ApiOperation(value = "Update existing user by id")
-    public ResponseEntity<UserCreateDTO> update(@RequestBody UserCreateDTO userDTO) {
+    public ResponseEntity<UserCreateDTO> update(@Valid @RequestBody UserCreateDTO userDTO) {
         log.info("Enter into update method with userDTO: {}", userDTO);
         User updatedUser = userMapper.toUser(userDTO);
         userService.update(updatedUser);

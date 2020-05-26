@@ -19,8 +19,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +39,6 @@ public class Business implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String name;
 

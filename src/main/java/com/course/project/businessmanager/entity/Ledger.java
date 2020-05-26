@@ -43,7 +43,6 @@ public class Ledger implements Serializable {
     @Enumerated(EnumType.STRING)
     private ProcurementType procurementType;
 
-
     @Column(name = "due_time")
     @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime dueTime;

@@ -14,9 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -31,8 +28,6 @@ public class Equipment implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String name;
 
@@ -40,10 +35,8 @@ public class Equipment implements Serializable {
     @JoinColumn(name = "worker_id")
     private Employee employee;
 
-    @Min(1)
     private Long quantity;
 
-    @Min(1)
     private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -36,10 +36,6 @@ public class EmployeeDTO {
 
     private TimeType timeType;
 
-    @NumberFormat
-    @NotBlank(message = "number cannot be empty")
-    private String number;
-
     @Email
     @Size(min = 5, max = 40)
     @NotBlank(message = "Email cannot be empty")

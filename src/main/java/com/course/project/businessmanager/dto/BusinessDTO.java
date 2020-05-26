@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -15,6 +17,8 @@ import java.util.UUID;
 public class BusinessDTO {
     private UUID id;
 
+    @NotBlank(message = "Name cannot be empty")
+    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

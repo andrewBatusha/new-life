@@ -46,18 +46,12 @@ public class Employee implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @NotEmpty(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String name;
 
-    @NotEmpty(message = "Surname cannot be empty")
-    @Size(min = 2, max = 35, message = "Surname must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String surname;
 
-    @NotEmpty(message = "Patronymic cannot be empty")
-    @Size(min = 2, max = 35, message = "Patronymic must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String patronymic;
 
@@ -68,17 +62,8 @@ public class Employee implements Serializable {
     @Enumerated(EnumType.STRING)
     private TimeType timeType;
 
-    @NumberFormat
-    @NotEmpty(message = "number cannot be empty")
-    @Column(unique = true, length = 13)
-    private String number;
-
-    @Email
-    @Size(min = 5, max = 40)
     @Column(unique = true, length = 40)
-    @NotEmpty(message = "Email cannot be empty")
     private String email;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id")

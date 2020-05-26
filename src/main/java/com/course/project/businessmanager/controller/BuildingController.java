@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class BuildingController {
 
     @PostMapping("/user")
     @ApiOperation(value = "Add user to existing building")
-    public ResponseEntity<BuildingDTO> addUserToBuilding(@RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO) {
+    public ResponseEntity<BuildingDTO> addUserToBuilding(@Valid @RequestBody AddManagerToBuildingDTO addManagerToBuildingDTO) {
         log.info("In addUserToBusiness (addManagerToBuildingDTO = [{}])", addManagerToBuildingDTO);
         Building updatedBuilding = buildingService.addUserToBuilding(
                 buildingMapper.convertToEntity(addManagerToBuildingDTO),
@@ -85,7 +86,7 @@ public class BuildingController {
 
     @PutMapping
     @ApiOperation(value = "Update existing building by id")
-    public ResponseEntity<BuildingDTO> update(@RequestBody BuildingDTO buildingDTO) {
+    public ResponseEntity<BuildingDTO> update(@Valid @RequestBody BuildingDTO buildingDTO) {
         log.info("In update (buildingDTO = [{}])", buildingDTO);
         Building building = buildingService.update(buildingMapper.convertToEntity(buildingDTO));
         return ResponseEntity.status(HttpStatus.OK).body(buildingMapper.convertToDto(building));

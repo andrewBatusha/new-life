@@ -51,7 +51,7 @@ public class EmployeeController {
         return ResponseEntity.ok().body(branchDTO);
     }
 
-    @GetMapping("/head")
+    @PutMapping("/head")
     @ApiOperation(value = "Get the list of  employees by boss email")
     public ResponseEntity<EmployeeDTO> getBoss(@Valid @RequestBody BuildingDTO buildingDTO) {
         log.info("Enter into get boss of EmployeeController");

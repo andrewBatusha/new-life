@@ -5,16 +5,26 @@ import com.course.project.businessmanager.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Data
 public class EquipmentDTO {
     private UUID id;
 
+    @NotBlank(message = "Name cannot be empty")
+    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
+    @Positive
+    @Min(1)
     private int quantity;
 
+    @Positive
+    @Min(1)
     private int price;
 
     private Employee employee;

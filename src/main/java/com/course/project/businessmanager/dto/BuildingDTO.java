@@ -8,6 +8,8 @@ import com.course.project.businessmanager.entity.Warehouse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +18,8 @@ import java.util.UUID;
 public class BuildingDTO {
     private UUID id;
 
+    @NotBlank(message = "Name cannot be empty")
+    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
     private String geolocation;

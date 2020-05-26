@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,7 +57,7 @@ public class BusinessController {
 
     @PostMapping
     @ApiOperation(value = "Create new business")
-    public ResponseEntity<BusinessDTO> save(@RequestBody BusinessDTO businessDTO, HttpServletRequest req) {
+    public ResponseEntity<BusinessDTO> save(@Valid @RequestBody BusinessDTO businessDTO, HttpServletRequest req) {
         log.info("Enter into save of BusinessController with businessDTO: {}", businessDTO);
         String token = jwtTokenProvider.resolveToken(req);
         String username = jwtTokenProvider.getUsername(token);
@@ -69,7 +70,7 @@ public class BusinessController {
 
     @PutMapping
     @ApiOperation(value = "Update existing business by id")
-    public ResponseEntity<BusinessDTO> update(@RequestBody BusinessDTO businessDTO) {
+    public ResponseEntity<BusinessDTO> update(@Valid @RequestBody BusinessDTO businessDTO) {
         log.info("In update (businessDTO = [{}])", businessDTO);
         Business business = businessService.update(businessMapper.convertToEntity(businessDTO));
         return ResponseEntity.status(HttpStatus.OK).body(businessMapper.convertToDto(business));
@@ -77,7 +78,7 @@ public class BusinessController {
 
     @PostMapping("/user")
     @ApiOperation(value = "Add user to existing business")
-    public ResponseEntity<BusinessDTO> addUserToBusiness(@RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO) {
+    public ResponseEntity<BusinessDTO> addUserToBusiness(@Valid @RequestBody AddOwnerToBusinessDTO addOwnerToBusinessDTO) {
         log.info("In update (addUserToBusinessDTO = [{}])", addOwnerToBusinessDTO);
         Business updatedBusiness = businessService.addUserToBusiness(
                 businessMapper.convertToEntity(addOwnerToBusinessDTO),

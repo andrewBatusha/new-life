@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,7 +54,7 @@ public class EquipmentController {
 
     @PutMapping
     @ApiOperation(value = "Update existing equipment by id")
-    public ResponseEntity<EquipmentDTO> update(@RequestBody EquipmentDTO equipmentDTO) {
+    public ResponseEntity<EquipmentDTO> update(@Valid @RequestBody EquipmentDTO equipmentDTO) {
         log.info("In update (EquipmentDTO = [{}])", equipmentDTO);
         Equipment equipment = equipmentService.update(equipmentMapper.convertToEntity(equipmentDTO));
         return ResponseEntity.status(HttpStatus.OK).body(equipmentMapper.convertToDto(equipment));
