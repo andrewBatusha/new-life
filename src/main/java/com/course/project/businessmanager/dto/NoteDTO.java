@@ -30,7 +30,7 @@ public class NoteDTO {
     @Size(min = 2, max = 250, message = "Name must be between 2 and 250 characters long")
     private String body;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm", lenient = OptBoolean.FALSE, timezone = "GMT+3")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm", timezone = "GMT+3")
     private LocalDateTime dueTime;
 
     private Priority priority;
