@@ -59,6 +59,7 @@ public class NoteServiceImpl implements NoteService {
     public Note update(Note object) {
         log.info("In update(entity = [{}]", object);
         if (isNoteExistsWithTitle(object.getTitle(), object.getUser().getEmail())) {
+            object.setDueTime(LocalDateTime.now());
             return noteRepository.update(object);
         } else {
             throw new EntityNotFoundException(Note.class, "title", String.valueOf(object.getTitle()));
