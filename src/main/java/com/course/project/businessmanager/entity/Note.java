@@ -40,7 +40,6 @@ public class Note implements Serializable {
     private String body;
 
     @Column(name = "due_time")
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime dueTime;
 
     @Enumerated(EnumType.STRING)
