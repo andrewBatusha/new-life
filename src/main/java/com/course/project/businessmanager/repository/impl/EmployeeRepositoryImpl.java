@@ -60,7 +60,7 @@ public class EmployeeRepositoryImpl extends BasicRepositoryImpl<Employee, UUID> 
     public Long countEmployeesByBossEmail(String email) {
         log.info("In countEmployeesByBossEmail(email = [{}])", email);
         return (Long) getSession().createQuery
-                ("SELECT count (*) FROM Employee e" +
+                ("SELECT count (*) FROM Employee e " +
                         "join e.position p where p.employee.email = :email")
                 .setParameter("email", email).getSingleResult();
     }
