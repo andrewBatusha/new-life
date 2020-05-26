@@ -21,11 +21,11 @@ public class EquipmentDTO {
 
     @Positive
     @Min(1)
-    private int quantity;
+    private Long quantity;
 
     @Positive
     @Min(1)
-    private int price;
+    private Long price;
 
     private Employee employee;
 
