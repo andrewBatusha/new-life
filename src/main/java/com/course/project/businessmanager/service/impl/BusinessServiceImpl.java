@@ -75,9 +75,6 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public Business save(Business object) {
         log.info("In save(entity = [{}]", object);
-        if (isBusinessExistsWithId(object.getId().toString())) {
-            throw new FieldAlreadyExistsException(Business.class, "title", object.getName());
-        }
         return businessRepository.save(object);
     }
 
