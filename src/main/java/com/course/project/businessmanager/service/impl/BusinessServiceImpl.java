@@ -87,7 +87,7 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public Business update(Business object) {
         log.info("In update(entity = [{}]", object);
-        if (isBusinessExistsWithId(object.getId().toString())) {
+        if (isBusinessExistsWithId(object.getId())) {
             return businessRepository.update(object);
         } else {
             throw new EntityNotFoundException(Business.class, "id", String.valueOf(object.getId()));
@@ -113,7 +113,7 @@ public class BusinessServiceImpl implements BusinessService {
      * @return true if Business with such title already exist
      */
     @Override
-    public boolean isBusinessExistsWithId(String uuid) {
+    public boolean isBusinessExistsWithId(UUID uuid) {
         log.info("In isBusinessExistsWithId(uuid = [{}])", uuid);
         return businessRepository.countBusinessWithId(uuid) != 0;
     }
