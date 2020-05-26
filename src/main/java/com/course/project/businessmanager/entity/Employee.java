@@ -3,7 +3,6 @@ package com.course.project.businessmanager.entity;
 import com.course.project.businessmanager.entity.enums.TimeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,9 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
