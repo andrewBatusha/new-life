@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.service.impl;
 
+import com.course.project.businessmanager.entity.Employee;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.entity.Warehouse;
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
@@ -7,6 +8,7 @@ import com.course.project.businessmanager.exception.BookKeepingException;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
 import com.course.project.businessmanager.exception.EntityWithQuantityException;
 import com.course.project.businessmanager.repository.EquipmentRepository;
+import com.course.project.businessmanager.service.EmployeeService;
 import com.course.project.businessmanager.service.EquipmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,12 @@ import java.util.UUID;
 public class EquipmentServiceImpl implements EquipmentService {
 
     private final EquipmentRepository equipmentRepository;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public EquipmentServiceImpl(EquipmentRepository equipmentRepository) {
+    public EquipmentServiceImpl(EquipmentRepository equipmentRepository, EmployeeService employeeService) {
         this.equipmentRepository = equipmentRepository;
+        this.employeeService = employeeService;
     }
 
     /**
@@ -121,6 +125,17 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findByName(title, buildingName).orElseThrow(
                 () -> new EntityNotFoundException(Warehouse.class, "title", title)
         );
+    }
+
+    @Override
+    public void assignEmployee(Equipment equipmentToUpdate, String email){
+        log.info("In assignEmployee(equipmentToUpdate = [{}], email = [{}])", equipmentToUpdate, email);
+        Employee employee = employeeService.getEmployeeByEmail(email, equipmentToUpdate.getBuilding().getName());
+        equipmentToUpdate.setQuantity(equipmentToUpdate.getQuantity()-1);
+        Equipment equipment = Equipment.builder().quantity(1L).build();
+        equipment.setEmployee(employee);
+        equipmentRepository.save(equipmentToUpdate);
+        equipmentRepository.update(equipmentToUpdate);
     }
 
 }

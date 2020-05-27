@@ -40,9 +40,22 @@ public class EmployeeRepositoryImpl extends BasicRepositoryImpl<Employee, UUID> 
      */
     @Override
     public Optional<Employee> findBoss(UUID id) {
-        log.info("Enter into findBoss  with email:{}", id);
+        log.info("Enter into findBoss  with building id:{}", id);
         TypedQuery<Employee> query = getSession().createNamedQuery("findBoss", Employee.class);
         query.setParameter("id", id);
+        List<Employee> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList().get(0));
+    }
+
+    @Override
+    public Optional<Employee> findByEmail(String email, String buildingName) {
+        log.info("Enter into findBoss  with building name:{}", buildingName);
+        TypedQuery<Employee> query = getSession().createNamedQuery("findByEmail", Employee.class);
+        query.setParameter("buildingName", buildingName);
+        query.setParameter("email", email);
         List<Employee> resultList = query.getResultList();
         if (resultList.isEmpty()) {
             return Optional.empty();

@@ -134,6 +134,19 @@ public class EmployeeServiceImpl implements EmployeeService {
      * @return List of employees
      */
     @Override
+    public Employee getEmployeeByEmail(String email, String buildingName) {
+        log.info("In getEmployeesByEmail(email = [{}], buildingName = [{}])", email, buildingName);
+        return employeeRepository.findByEmail(email, buildingName).orElseThrow(
+                () -> new EntityNotFoundException(Employee.class, "email", email));
+    }
+
+
+    /**
+     * Method gets information about all employees by boss email from Repository
+     *
+     * @return List of employees
+     */
+    @Override
     public List<Employee> performEmployeesBranch(String email) {
         log.info("In performEmployeesBranch(email = [{}])", email);
         List<Employee> employees = getEmployeesByBossEmail(email);

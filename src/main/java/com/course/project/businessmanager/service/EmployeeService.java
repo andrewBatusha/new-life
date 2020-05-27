@@ -11,4 +11,5 @@ public interface EmployeeService extends BasicService<Employee, UUID> {
     List<Employee> getEmployeesByBossEmail(String email);
     List<Employee> performEmployeesBranch(String email);
     Employee getBoss(UUID id);
+    Employee getEmployeeByEmail(String email, String buildingName);
 }

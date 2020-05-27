@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.controller;
 
+import com.course.project.businessmanager.dto.AssignEmployeeToEquipmentDTO;
 import com.course.project.businessmanager.dto.EquipmentDTO;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.mapper.EquipmentMapper;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,5 +42,14 @@ public class EquipmentController {
         log.info("In get(id = [{}])", id);
         Equipment equipment = equipmentService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(equipmentMapper.convertToDto(equipment));
+    }
+
+    @PutMapping("/employee")
+    @ApiOperation(value = "Get equipment info by id")
+    public ResponseEntity assign(@Valid @RequestBody AssignEmployeeToEquipmentDTO assignEmployeeToEquipmentDTO){
+        log.info("In assign(assignEmployeeToEquipmentDTO = [{}])", assignEmployeeToEquipmentDTO);
+        Equipment equipmentToUpdate = equipmentMapper.convertToEntity(assignEmployeeToEquipmentDTO);
+        equipmentService.assignEmployee(equipmentToUpdate, assignEmployeeToEquipmentDTO.getEmail());
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

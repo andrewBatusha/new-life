@@ -12,4 +12,5 @@ public interface EquipmentService{
     Equipment getEquipmentByName(String title, String buildingName);
     Equipment delete(Equipment object);
     Equipment getById(UUID id);
+    void assignEmployee(Equipment equipmentToUpdate, String email);
 }

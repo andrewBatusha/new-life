@@ -34,6 +34,12 @@ import java.util.UUID;
                 "join e.position p " +
                 "join e.building b where p.employee.id is null and b.id = :id"
 )
+@NamedQuery(
+        name = "findByEmail",
+        query = "select e from Employee e " +
+                "join e.building b " +
+                "where b.name =:buildingName and e.email =:email"
+)
 @Entity
 @NoArgsConstructor
 @Data
