@@ -30,8 +30,8 @@ import java.util.UUID;
 @NamedQuery(
         name = "findBoss",
         query = "select e from Employee e " +
-                "join e.position p with p.employee.id is null " +
-                "join e.building b with b.id = :id"
+                "join e.position p " +
+                "join e.building b where p.employee.id is null and b.id = :id"
 )
 @Entity
 @NoArgsConstructor

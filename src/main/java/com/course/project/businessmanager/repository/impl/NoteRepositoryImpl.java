@@ -22,9 +22,10 @@ public class NoteRepositoryImpl extends BasicRepositoryImpl<Note, UUID> implemen
     public Long countNoteWithName(String title, String email) {
         log.info("In countNoteWithName(title = [{}], email = [{}])", title, email);
         return (Long) getSession().createQuery
-                ("SELECT count (*) FROM Note n WHERE n.title = :title " +
-                        "join n.user u with u.email= :email")
+                ("SELECT count (*) FROM Note n " +
+                        "join n.user u WHERE n.title = :title and u.email= :email")
                 .setParameter("title", title)
                 .setParameter("email",email).getSingleResult();
     }
 }
+
