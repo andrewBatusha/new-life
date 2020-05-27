@@ -45,6 +45,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @Table(name = "users")
+@JsonIgnoreProperties({"businessList"})
 public class User implements Serializable {
 
     @Id
