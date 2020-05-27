@@ -51,8 +51,8 @@ public class Business implements Serializable {
             targetEntity = User.class)
     @JoinTable(
             name = "Users_Businesses",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "business_id")}
+            joinColumns = {@JoinColumn(name = "business_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
     )
     private List<User> users = new ArrayList<>();
 
