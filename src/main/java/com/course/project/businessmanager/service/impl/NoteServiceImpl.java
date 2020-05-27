@@ -57,9 +57,9 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public Note update(Note object) {
+        object.setDueTime(LocalDateTime.now());
         log.info("In update(entity = [{}]", object);
         if (isNoteExistsWithTitle(object.getTitle(), object.getUser().getEmail())) {
-            object.setDueTime(LocalDateTime.now());
             return noteRepository.update(object);
         } else {
             throw new EntityNotFoundException(Note.class, "title", String.valueOf(object.getTitle()));
