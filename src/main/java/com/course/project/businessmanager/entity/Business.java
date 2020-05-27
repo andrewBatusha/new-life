@@ -43,12 +43,8 @@ public class Business implements Serializable {
     private String name;
 
     @ManyToMany(cascade = {
-            CascadeType.DETACH,
-            CascadeType.MERGE,
-            CascadeType.REFRESH,
-            CascadeType.PERSIST
-    },
-            targetEntity = User.class)
+            CascadeType.MERGE
+    })
     @JoinTable(
             name = "Users_Businesses",
             joinColumns = {@JoinColumn(name = "business_id")},
