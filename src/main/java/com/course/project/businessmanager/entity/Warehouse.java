@@ -19,7 +19,9 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findWarehouseName",
-        query = "select w from Warehouse w where w.name= :name"
+        query = "select w from Warehouse w " +
+                "join w.building b " +
+                "where w.name= :warehouseName and b.name = :buildingName"
 )
 @Entity
 @NoArgsConstructor
