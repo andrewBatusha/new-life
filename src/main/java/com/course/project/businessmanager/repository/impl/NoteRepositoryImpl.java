@@ -20,10 +20,10 @@ public class NoteRepositoryImpl extends BasicRepositoryImpl<Note, UUID> implemen
      */
     @Override
     public Long countNoteWithName(String name, String email) {
-        log.info("In countNoteWithName(name = [{}])", name);
+        log.info("In countNoteWithName(name = [{}], email = [{}])", name, email);
         return (Long) getSession().createQuery
                 ("SELECT count (*) FROM Note n WHERE n.name = :name " +
-                        "join n.user u where u.email= :email")
+                        "join n.user u with u.email= :email")
                 .setParameter("name", name)
                 .setParameter("email",email).getSingleResult();
     }
