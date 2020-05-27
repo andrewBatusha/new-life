@@ -23,7 +23,8 @@ import java.util.UUID;
         name = "findEquipmentName",
         query = "select e from Equipment e " +
                 "join e.building b " +
-                "where e.name= :equipmentName and b.name = :buildingName"
+                "join e.employee empl " +
+                "where e.name= :equipmentName and b.name = :buildingName and empl.id is null"
 )
 @Entity
 @NoArgsConstructor
