@@ -51,9 +51,9 @@ public class WarehouseRepositoryImpl extends BasicRepositoryImpl<Warehouse, UUID
      */
     @Override
     public Optional<Warehouse> findByName(String name) {
-        log.info("Enter into findByEmail method with email:{}", name);
+        log.info("Enter into findByEmail method with name:{}", name);
         TypedQuery<Warehouse> query = getSession().createNamedQuery("findName", Warehouse.class).setMaxResults(1);
-        query.setParameter("email", name);
+        query.setParameter("name", name);
         List<Warehouse> warehouses = query.getResultList();
         if (warehouses.isEmpty()) {
             return Optional.empty();

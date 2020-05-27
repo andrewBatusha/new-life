@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findName",
-        query = "from Warehouse w where w.name= :name"
+        query = "select w from Warehouse w where w.name= :name"
 )
 @Entity
 @NoArgsConstructor
