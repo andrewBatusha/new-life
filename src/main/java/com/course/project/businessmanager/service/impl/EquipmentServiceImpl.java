@@ -134,7 +134,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         equipmentToUpdate.setQuantity(equipmentToUpdate.getQuantity()-1);
         Equipment equipment = Equipment.builder().quantity(1L).build();
         equipment.setEmployee(employee);
-        equipmentRepository.save(equipmentToUpdate);
+        equipmentRepository.save(equipment);
         equipmentRepository.update(equipmentToUpdate);
     }
 
