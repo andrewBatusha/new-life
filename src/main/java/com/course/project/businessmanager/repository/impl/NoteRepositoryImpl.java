@@ -12,19 +12,19 @@ import java.util.UUID;
 public class NoteRepositoryImpl extends BasicRepositoryImpl<Note, UUID> implements NoteRepository {
 
     /**
-     * The method used for getting number of notes with name from database
+     * The method used for getting number of notes with title from database
      *
-     * @param name title of Note
+     * @param title title of Note
      * @param email Note owners mail
-     * @return Long number of records with name
+     * @return Long number of records with title
      */
     @Override
-    public Long countNoteWithName(String name, String email) {
-        log.info("In countNoteWithName(name = [{}], email = [{}])", name, email);
+    public Long countNoteWithName(String title, String email) {
+        log.info("In countNoteWithName(title = [{}], email = [{}])", title, email);
         return (Long) getSession().createQuery
-                ("SELECT count (*) FROM Note n WHERE n.name = :name " +
+                ("SELECT count (*) FROM Note n WHERE n.title = :title " +
                         "join n.user u with u.email= :email")
-                .setParameter("name", name)
+                .setParameter("title", title)
                 .setParameter("email",email).getSingleResult();
     }
 }
