@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.exception.handler;
 
+import com.course.project.businessmanager.exception.BookKeepingException;
 import com.course.project.businessmanager.exception.DeleteDisabledException;
 import com.course.project.businessmanager.exception.EntityAlreadyExistsException;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
@@ -64,7 +65,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * object already exists in an another class.
      */
     @ExceptionHandler({IncorrectPasswordException.class, EntityAlreadyExistsException.class,
-            IncorrectEmailException.class, WarehouseQuantityException.class})
+            IncorrectEmailException.class, WarehouseQuantityException.class, BookKeepingException.class})
     protected ResponseEntity<Object> handleIncorrectFieldExceptions(
             RuntimeException ex) {
         ApiError apiError = new ApiError(BAD_REQUEST);

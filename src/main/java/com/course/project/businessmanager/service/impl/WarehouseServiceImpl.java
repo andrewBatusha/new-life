@@ -2,6 +2,7 @@ package com.course.project.businessmanager.service.impl;
 
 import com.course.project.businessmanager.entity.Warehouse;
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
+import com.course.project.businessmanager.exception.BookKeepingException;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
 import com.course.project.businessmanager.exception.WarehouseQuantityException;
 import com.course.project.businessmanager.repository.WarehouseRepository;
@@ -62,8 +63,11 @@ public class WarehouseServiceImpl implements WarehouseService {
         log.info("In save(entity = [{}]", object);
         if (isWarehouseExistsWithTitle(object.getName())) {
            return update(object, bookkeeping);
+        } else if(bookkeeping == Bookkeeping.EXPENSES) {
+            return warehouseRepository.save(object);
+        } else {
+            throw new BookKeepingException("There is no such item in warehouse");
         }
-        return warehouseRepository.save(object);
     }
 
     /**
