@@ -32,11 +32,11 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findEmail",
-        query = "from User u where u.email= :email"
+        query = "select u from User u where u.email= :email"
 )
 @NamedQuery(
         name = "findToken",
-        query = "from User u where u.token= :token"
+        query = "select u from User u where u.token= :token"
 )
 @NoArgsConstructor
 @Getter
@@ -45,6 +45,7 @@ import java.util.UUID;
 @Entity
 @AllArgsConstructor
 @Table(name = "users")
+@JsonIgnoreProperties({"businessList"})
 public class User implements Serializable {
 
     @Id
