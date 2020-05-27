@@ -128,14 +128,18 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public void assignEmployee(Equipment equipmentToUpdate, String email){
+    public void assignEmployee(Equipment equipmentToUpdate, String email) {
         log.info("In assignEmployee(equipmentToUpdate = [{}], email = [{}])", equipmentToUpdate, email);
         Employee employee = employeeService.getEmployeeByEmail(email, equipmentToUpdate.getBuilding().getName());
-        equipmentToUpdate.setQuantity(equipmentToUpdate.getQuantity()-1);
+        equipmentToUpdate.setQuantity(equipmentToUpdate.getQuantity() - 1);
         Equipment equipment = Equipment.builder().name(equipmentToUpdate.getName()).price(equipmentToUpdate.getPrice()).quantity(1L).building(equipmentToUpdate.getBuilding()).build();
         equipment.setEmployee(employee);
+        if (equipmentToUpdate.getQuantity() == 0) {
+            delete(equipmentToUpdate);
+        } else {
+            equipmentRepository.update(equipmentToUpdate);
+        }
         equipmentRepository.save(equipment);
-        equipmentRepository.update(equipmentToUpdate);
     }
 
 }

@@ -29,7 +29,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder(toBuilder=true)
+@Builder(toBuilder = true)
 @Table(name = "equipments")
 public class Equipment implements Serializable {
 
