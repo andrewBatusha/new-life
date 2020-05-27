@@ -4,7 +4,7 @@ import com.course.project.businessmanager.entity.Warehouse;
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.exception.BookKeepingException;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
-import com.course.project.businessmanager.exception.WarehouseQuantityException;
+import com.course.project.businessmanager.exception.EntityWithQuantityException;
 import com.course.project.businessmanager.repository.WarehouseRepository;
 import com.course.project.businessmanager.service.WarehouseService;
 import lombok.extern.slf4j.Slf4j;
@@ -85,7 +85,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             dbWarehouse = warehouseRepository.update(dbWarehouse);
         } else if (bookkeeping == Bookkeeping.INCOME) {
             if (dbWarehouse.getQuantity() < object.getQuantity()) {
-                throw new WarehouseQuantityException("fuck of");
+                throw new EntityWithQuantityException("fuck of");
             } else if (dbWarehouse.getQuantity().equals(object.getQuantity())) {
                 dbWarehouse = delete(dbWarehouse);
             } else {

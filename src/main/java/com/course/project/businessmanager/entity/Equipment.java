@@ -12,11 +12,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.UUID;
 
+@NamedQuery(
+        name = "findName",
+        query = "select e from Equipment e " +
+                "join e.building b " +
+                "where e.name= :warehouseName and b.name = :buildingName"
+)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor

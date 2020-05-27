@@ -106,21 +106,21 @@ public class LedgerServiceImpl implements LedgerService {
     private void transferLedger(Ledger object) {
         if (object.getProcurementType() == ProcurementType.WAREHOUSE) {
             warehouseService.save(new Warehouse(
-                    null,
-                    object.getName(),
-                    object.getQuantity(),
-                    object.getUnitOfMeasurement(),
-                    object.getBuilding()),
+                            null,
+                            object.getName(),
+                            object.getQuantity(),
+                            object.getUnitOfMeasurement(),
+                            object.getBuilding()),
                     object.getBookkeeping());
         } else if (object.getProcurementType() == ProcurementType.EQUIPMENT) {
             equipmentService.save(new Equipment(
-                    null,
-                    object.getName(),
-                    null,
-                    object.getQuantity(),
-                    object.getPrice(),
-                    object.getBuilding()
-            ));
+                            null,
+                            object.getName(),
+                            null,
+                            object.getQuantity(),
+                            object.getPrice(),
+                            object.getBuilding()),
+                    object.getBookkeeping());
         }
     }
 }

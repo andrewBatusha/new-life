@@ -7,7 +7,7 @@ import com.course.project.businessmanager.exception.EntityNotFoundException;
 import com.course.project.businessmanager.exception.FieldAlreadyExistsException;
 import com.course.project.businessmanager.exception.IncorrectEmailException;
 import com.course.project.businessmanager.exception.IncorrectPasswordException;
-import com.course.project.businessmanager.exception.WarehouseQuantityException;
+import com.course.project.businessmanager.exception.EntityWithQuantityException;
 import com.course.project.businessmanager.exception.apierror.ApiError;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.PSQLException;
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * object already exists in an another class.
      */
     @ExceptionHandler({IncorrectPasswordException.class, EntityAlreadyExistsException.class,
-            IncorrectEmailException.class, WarehouseQuantityException.class, BookKeepingException.class})
+            IncorrectEmailException.class, EntityWithQuantityException.class, BookKeepingException.class})
     protected ResponseEntity<Object> handleIncorrectFieldExceptions(
             RuntimeException ex) {
         ApiError apiError = new ApiError(BAD_REQUEST);

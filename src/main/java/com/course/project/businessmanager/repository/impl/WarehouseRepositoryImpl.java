@@ -1,10 +1,8 @@
 package com.course.project.businessmanager.repository.impl;
 
-import com.course.project.businessmanager.entity.User;
 import com.course.project.businessmanager.entity.Warehouse;
 import com.course.project.businessmanager.repository.WarehouseRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.TypedQuery;
@@ -15,19 +13,6 @@ import java.util.UUID;
 @Repository
 @Slf4j
 public class WarehouseRepositoryImpl extends BasicRepositoryImpl<Warehouse, UUID> implements WarehouseRepository{
-
-    /**
-     * Method gets information about all warehouses from DB
-     *
-     * @return List of all warehouses with ASCII sorting by title
-     */
-    @Override
-    public List<Warehouse> getAll() {
-        log.info("In getAll()");
-        Session session = getSession();
-        return session.createQuery("from Warehouse ORDER BY name ASC")
-                .getResultList();
-    }
 
     /**
      * The method used for getting number of warehouses with name from database
