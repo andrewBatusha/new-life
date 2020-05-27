@@ -132,7 +132,7 @@ public class EquipmentServiceImpl implements EquipmentService {
         log.info("In assignEmployee(equipmentToUpdate = [{}], email = [{}])", equipmentToUpdate, email);
         Employee employee = employeeService.getEmployeeByEmail(email, equipmentToUpdate.getBuilding().getName());
         equipmentToUpdate.setQuantity(equipmentToUpdate.getQuantity()-1);
-        Equipment equipment = Equipment.builder().quantity(1L).build();
+        Equipment equipment = Equipment.builder().name(equipmentToUpdate.getName()).price(equipmentToUpdate.getPrice()).quantity(1L).building(equipmentToUpdate.getBuilding()).build();
         equipment.setEmployee(employee);
         equipmentRepository.save(equipment);
         equipmentRepository.update(equipmentToUpdate);
