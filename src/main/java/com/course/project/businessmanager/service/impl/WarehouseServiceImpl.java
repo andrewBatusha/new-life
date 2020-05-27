@@ -61,7 +61,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Warehouse save(Warehouse object, Bookkeeping bookkeeping) {
         log.info("In save(entity = [{}]", object);
         if (isWarehouseExistsWithTitle(object.getName())) {
-            update(object, bookkeeping);
+           return update(object, bookkeeping);
         }
         return warehouseRepository.save(object);
     }
@@ -73,22 +73,23 @@ public class WarehouseServiceImpl implements WarehouseService {
      * @return updated Warehouse entity
      */
     @Override
-    public void update(Warehouse object, Bookkeeping bookkeeping) {
+    public Warehouse update(Warehouse object, Bookkeeping bookkeeping) {
         log.info("In update(entity = [{}]", object);
         Warehouse dbWarehouse = getWarehouseByName(object.getName());
         if (bookkeeping == Bookkeeping.EXPENSES) {
             dbWarehouse.setQuantity(dbWarehouse.getQuantity() + object.getQuantity());
-            warehouseRepository.update(dbWarehouse);
+            dbWarehouse = warehouseRepository.update(dbWarehouse);
         } else if (bookkeeping == Bookkeeping.INCOME) {
             if (dbWarehouse.getQuantity() < object.getQuantity()) {
                 throw new WarehouseQuantityException("fuck of");
-            } else if (dbWarehouse.getQuantity() == object.getQuantity()) {
-                delete(dbWarehouse);
+            } else if (dbWarehouse.getQuantity().equals(object.getQuantity())) {
+                dbWarehouse = delete(dbWarehouse);
             } else {
                 dbWarehouse.setQuantity(dbWarehouse.getQuantity() - object.getQuantity());
-                warehouseRepository.update(dbWarehouse);
+                dbWarehouse = warehouseRepository.update(dbWarehouse);
             }
         }
+        return dbWarehouse;
     }
 
     /**

@@ -17,7 +17,7 @@ public interface WarehouseService {
 
     Warehouse getWarehouseByName(String title);
 
-    void update(Warehouse object, Bookkeeping bookkeeping);
+    Warehouse update(Warehouse object, Bookkeeping bookkeeping);
 
     Warehouse delete(Warehouse object);
 }
