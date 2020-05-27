@@ -98,7 +98,7 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public boolean isNoteExistsWithTitle(String title, String email) {
-        log.info("In isNoteExistsWithTitle(title = [{}])", title);
+        log.info("In isNoteExistsWithTitle(title = [{}], email = [{}])", title, email);
         return noteRepository.countNoteWithName(title, email) != 0;
     }
 

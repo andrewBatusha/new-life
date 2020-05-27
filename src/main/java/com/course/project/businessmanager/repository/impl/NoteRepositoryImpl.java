@@ -23,8 +23,8 @@ public class NoteRepositoryImpl extends BasicRepositoryImpl<Note, UUID> implemen
         log.info("In countNoteWithName(name = [{}])", name);
         return (Long) getSession().createQuery
                 ("SELECT count (*) FROM Note n WHERE n.name = :name " +
-                        "join b.user u where u.email= :email")
+                        "join n.user u where u.email= :email")
                 .setParameter("name", name)
-                .setParameter("email", email).getSingleResult();
+                .setParameter("email",email).getSingleResult();
     }
 }
