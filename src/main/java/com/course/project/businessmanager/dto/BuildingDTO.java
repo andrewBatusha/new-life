@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Business;
+import com.course.project.businessmanager.entity.Employee;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.entity.User;
@@ -29,6 +30,8 @@ public class BuildingDTO {
     private List<Ledger> ledgers = new ArrayList<>();
 
     private List<Warehouse> warehouses = new ArrayList<>();
+
+    private List<Employee> employees = new ArrayList<>();
 
     private Business business;
 

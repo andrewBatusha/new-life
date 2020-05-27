@@ -57,7 +57,6 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public Note update(Note object) {
-        object.setDueTime(LocalDateTime.now());
         log.info("In update(entity = [{}]", object);
         if (isNoteExistsWithTitle(object.getTitle(), object.getUser().getEmail())) {
             return noteRepository.update(object);
@@ -74,7 +73,6 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public Note save(Note object) {
-        object.setDueTime(LocalDateTime.now());
         log.info("In save(entity = [{}]", object);
         return noteRepository.save(object);
     }
