@@ -123,7 +123,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     public Equipment getEquipmentByName(String title, String buildingName) {
         log.info("In isWarehouseExistsWithTitle(title = [{}], buildingName = [{}])", title, buildingName);
         return equipmentRepository.findByName(title, buildingName).orElseThrow(
-                () -> new EntityNotFoundException(Warehouse.class, "title", title)
+                () -> new EntityNotFoundException(Equipment.class, "title", title)
         );
     }
 
@@ -147,5 +147,4 @@ public class EquipmentServiceImpl implements EquipmentService {
         equipmentRepository.save(equipment);
         }
     }
-
 }

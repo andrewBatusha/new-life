@@ -32,7 +32,7 @@ import java.util.UUID;
         name = "findBoss",
         query = "select e from Employee e " +
                 "join e.position p " +
-                "join e.building b where p.employee.id is null and b.id = :id"
+                "join e.building b where p.employee is null and b.id = :id"
 )
 @NamedQuery(
         name = "findByEmail",
