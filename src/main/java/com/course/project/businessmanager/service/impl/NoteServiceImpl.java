@@ -57,7 +57,7 @@ public class NoteServiceImpl implements NoteService {
      */
     @Override
     public Note update(Note object) {
-        log.info("In update(entity = [{}]", object);
+        log.info("In update(entity = [{}], email = [{}])", object, object.getUser().getEmail());
         if (isNoteExistsWithTitle(object.getTitle(), object.getUser().getEmail())) {
             return noteRepository.update(object);
         } else {
