@@ -21,7 +21,6 @@ public class BusinessDTO {
     @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<User> users = new ArrayList<>();
 
     private List<Building> buildings = new ArrayList<>();
