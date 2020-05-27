@@ -22,9 +22,7 @@ import java.util.UUID;
 @NamedQuery(
         name = "findEquipmentName",
         query = "select e from Equipment e " +
-                "join e.building b " +
-                "join e.employee empl " +
-                "where e.name= :equipmentName and b.name = :buildingName and empl.email is null "
+                "where e.name= :equipmentName and e.building.name = :buildingName and e.employee.email is null "
 )
 @Entity
 @NoArgsConstructor
