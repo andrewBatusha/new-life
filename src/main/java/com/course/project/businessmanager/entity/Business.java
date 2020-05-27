@@ -2,6 +2,7 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.utils.EntityIdResolver;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,8 +33,9 @@ import java.util.UUID;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id",
         resolver = EntityIdResolver.class,
-        scope=Business.class)
+        scope = Business.class)
 @ToString(exclude = {"buildings", "users"})
+@JsonIgnoreProperties({"users"})
 public class Business implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,8 +45,11 @@ public class Business implements Serializable {
     private String name;
 
     @ManyToMany(cascade = {
-            CascadeType.MERGE
-    })
+            CascadeType.MERGE, CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST
+    }
+    )
     @JoinTable(
             name = "Users_Businesses",
             joinColumns = {@JoinColumn(name = "business_id")},
