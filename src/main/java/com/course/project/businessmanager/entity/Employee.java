@@ -37,7 +37,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Data
-@ToString(exclude={"position"})
+@ToString(exclude={"position", "building"})
 @Table(name = "employees")
 public class Employee implements Serializable {
 
