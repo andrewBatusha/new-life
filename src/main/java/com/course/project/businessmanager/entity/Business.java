@@ -45,7 +45,7 @@ public class Business implements Serializable {
     private String name;
 
     @ManyToMany(cascade = {
-            CascadeType.MERGE, CascadeType.MERGE,
+            CascadeType.MERGE,
             CascadeType.REFRESH,
             CascadeType.PERSIST
     }
