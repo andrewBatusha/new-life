@@ -3,6 +3,7 @@ package com.course.project.businessmanager.entity;
 import com.course.project.businessmanager.entity.enums.TimeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,6 +37,7 @@ import java.util.UUID;
 @Entity
 @NoArgsConstructor
 @Data
+@ToString(exclude={"position"})
 @Table(name = "employees")
 public class Employee implements Serializable {
 
