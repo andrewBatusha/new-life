@@ -2,7 +2,6 @@ package com.course.project.businessmanager.dto;
 
 import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.User;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
