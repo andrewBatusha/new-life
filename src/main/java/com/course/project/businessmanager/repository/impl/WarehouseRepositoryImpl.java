@@ -29,16 +29,17 @@ public class WarehouseRepositoryImpl extends BasicRepositoryImpl<Warehouse, UUID
     }
 
     /**
-     * The method used for getting Warehouse by name from database
+     * The method used for getting Warehouse by warehouseName from database
      *
-     * @param name String name used to find warehouse by it
+     * @param warehouseName String warehouseName used to find warehouse by it
      * @return Warehouse
      */
     @Override
-    public Optional<Warehouse> findByName(String name) {
-        log.info("Enter into findByEmail method with name:{}", name);
+    public Optional<Warehouse> findByName(String warehouseName, String buildingName) {
+        log.info("Enter into findByEmail method with warehouseName:{}", warehouseName);
         TypedQuery<Warehouse> query = getSession().createNamedQuery("findWarehouseName", Warehouse.class).setMaxResults(1);
-        query.setParameter("name", name);
+        query.setParameter("warehouseName", warehouseName);
+        query.setParameter("buildingName",buildingName );
         List<Warehouse> warehouses = query.getResultList();
         if (warehouses.isEmpty()) {
             return Optional.empty();

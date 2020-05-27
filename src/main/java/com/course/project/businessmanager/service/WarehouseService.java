@@ -15,7 +15,7 @@ public interface WarehouseService {
 
     boolean isWarehouseExistsWithTitle(String title);
 
-    Warehouse getWarehouseByName(String title);
+    Warehouse getWarehouseByName(String warehouseName, String buildingName);
 
     Warehouse update(Warehouse object, Bookkeeping bookkeeping);
 

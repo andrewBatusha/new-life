@@ -79,7 +79,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public Warehouse update(Warehouse object, Bookkeeping bookkeeping) {
         log.info("In update(entity = [{}]", object);
-        Warehouse dbWarehouse = getWarehouseByName(object.getName());
+        Warehouse dbWarehouse = getWarehouseByName(object.getName(), object.getBuilding().getName());
         if (bookkeeping == Bookkeeping.EXPENSES) {
             dbWarehouse.setQuantity(dbWarehouse.getQuantity() + object.getQuantity());
             dbWarehouse = warehouseRepository.update(dbWarehouse);
@@ -123,14 +123,14 @@ public class WarehouseServiceImpl implements WarehouseService {
     /**
      * Method finds Warehouse by name
      *
-     * @param title
+     * @param warehouseName
      * @return warehouse
      */
     @Override
-    public Warehouse getWarehouseByName(String title) {
-        log.info("In isWarehouseExistsWithTitle(title = [{}])", title);
-        return warehouseRepository.findByName(title).orElseThrow(
-                () -> new EntityNotFoundException(Warehouse.class, "title", title)
+    public Warehouse getWarehouseByName(String warehouseName, String buildingName) {
+        log.info("In isWarehouseExistsWithTitle(warehouseName = [{}], buildingName = [{}])", warehouseName, buildingName);
+        return warehouseRepository.findByName(warehouseName, buildingName).orElseThrow(
+                () -> new EntityNotFoundException(Warehouse.class, "warehouseName", warehouseName)
         );
     }
 }
