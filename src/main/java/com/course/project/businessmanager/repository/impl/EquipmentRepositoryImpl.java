@@ -38,7 +38,7 @@ public class EquipmentRepositoryImpl extends BasicRepositoryImpl<Equipment, UUID
     @Override
     public Optional<Equipment> findByName(String equipmentName, String buildingName ) {
         log.info("Enter into findByEmail method with equipmentName:{}", equipmentName);
-        TypedQuery<Equipment> query = getSession().createNamedQuery("findName", Equipment.class).setMaxResults(1);
+        TypedQuery<Equipment> query = getSession().createNamedQuery("findEquipmentName", Equipment.class).setMaxResults(1);
         query.setParameter("equipmentName", equipmentName);
         query.setParameter("buildingName", buildingName);
         List<Equipment> resultList = query.getResultList();

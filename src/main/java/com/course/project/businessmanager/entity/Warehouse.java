@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @NamedQuery(
-        name = "findName",
+        name = "findWarehouseName",
         query = "select w from Warehouse w where w.name= :name"
 )
 @Entity

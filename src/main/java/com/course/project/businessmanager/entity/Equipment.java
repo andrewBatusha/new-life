@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @NamedQuery(
-        name = "findName",
+        name = "findEquipmentName",
         query = "select e from Equipment e " +
                 "join e.building b " +
                 "where e.name= :warehouseName and b.name = :buildingName"

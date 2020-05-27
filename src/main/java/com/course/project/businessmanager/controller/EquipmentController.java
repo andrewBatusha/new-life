@@ -43,20 +43,4 @@ public class EquipmentController {
         Equipment equipment = equipmentService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(equipmentMapper.convertToDto(equipment));
     }
-
-
-    @GetMapping
-    @ApiOperation(value = "Get the list of all equipments")
-    public ResponseEntity<List<EquipmentDTO>> list() {
-        log.info("Enter into list of EquipmentController");
-        return ResponseEntity.ok().body(equipmentMapper.convertToDtoList(equipmentService.getAll()));
-    }
-
-    @PutMapping
-    @ApiOperation(value = "Update existing equipment by id")
-    public ResponseEntity<EquipmentDTO> update(@Valid @RequestBody EquipmentDTO equipmentDTO) {
-        log.info("In update (EquipmentDTO = [{}])", equipmentDTO);
-        Equipment equipment = equipmentService.update(equipmentMapper.convertToEntity(equipmentDTO));
-        return ResponseEntity.status(HttpStatus.OK).body(equipmentMapper.convertToDto(equipment));
-    }
 }
