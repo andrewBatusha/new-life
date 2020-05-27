@@ -76,10 +76,10 @@ public class WarehouseServiceImpl implements WarehouseService {
     public void update(Warehouse object, Bookkeeping bookkeeping) {
         log.info("In update(entity = [{}]", object);
         Warehouse dbWarehouse = getWarehouseByName(object.getName());
-        if (bookkeeping == Bookkeeping.INCOME) {
+        if (bookkeeping == Bookkeeping.EXPENSES) {
             dbWarehouse.setQuantity(dbWarehouse.getQuantity() + object.getQuantity());
             warehouseRepository.update(dbWarehouse);
-        } else if (bookkeeping == Bookkeeping.EXPENSES) {
+        } else if (bookkeeping == Bookkeeping.INCOME) {
             if (dbWarehouse.getQuantity() < object.getQuantity()) {
                 throw new WarehouseQuantityException("fuck of");
             } else if (dbWarehouse.getQuantity() == object.getQuantity()) {
