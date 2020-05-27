@@ -5,7 +5,6 @@ import com.course.project.businessmanager.entity.enums.Priority;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -38,9 +36,6 @@ public class Note implements Serializable {
 
     @Column(length = 250, nullable = false)
     private String body;
-
-    @Column(name = "due_time")
-    private LocalDateTime dueTime;
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
