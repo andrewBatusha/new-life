@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.controller;
 
+import com.course.project.businessmanager.dto.BuildingDTO;
 import com.course.project.businessmanager.dto.ExpensesDTO;
 import com.course.project.businessmanager.dto.LedgerDTO;
 import com.course.project.businessmanager.entity.Ledger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -51,10 +53,10 @@ public class LedgerController {
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getAll()));
     }
 
-    @GetMapping("/expenses")
-    public ResponseEntity<List<LedgerDTO>> expensesList() {
+    @GetMapping("/best")
+    public ResponseEntity<List<LedgerDTO>> bestProductList(@RequestParam String name) {
         log.info("Enter into list of LedgerController");
-        return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getLedgerExpenses()));
+        return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getBestProduct(name)));
     }
 
 

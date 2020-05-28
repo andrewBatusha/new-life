@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.service.impl;
 
+import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.entity.Warehouse;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,8 +76,8 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public List<Ledger> getLedgerExpenses(){
-        return ledgerRepository.findExpenses();
+    public List<Ledger> getBestProduct(String name){
+        return ledgerRepository.findBestProduct(name).orElse(Collections.emptyList());
     }
 
     /**
