@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Transactional
@@ -71,6 +72,11 @@ public class LedgerServiceImpl implements LedgerService {
         log.info("In save(entity = [{}]", object);
         transferLedger(object);
         return ledgerRepository.save(object);
+    }
+
+    @Override
+    public List<Map<String, Long>> getLedgerExpenses(){
+        return ledgerRepository.findExpenses();
     }
 
     /**

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -43,6 +44,13 @@ public class LedgerController {
     public ResponseEntity<List<LedgerDTO>> list() {
         log.info("Enter into list of LedgerController");
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getAll()));
+    }
+
+    @GetMapping("/expenses")
+    @ApiOperation(value = "Get the list of all ledgers")
+    public ResponseEntity<List<Map<String, Long>>> expensesList() {
+        log.info("Enter into list of LedgerController");
+        return ResponseEntity.ok().body(ledgerService.getLedgerExpenses());
     }
 
 

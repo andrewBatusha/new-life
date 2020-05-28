@@ -8,5 +8,6 @@ import java.util.UUID;
 public interface EquipmentRepository extends BasicRepository<Equipment, UUID> {
     Long countEquipmentsWithName(String title);
 
+
     Optional<Equipment> findByName(String equipmentName, String buildingName);
 }
