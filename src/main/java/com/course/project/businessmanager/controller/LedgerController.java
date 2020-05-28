@@ -59,9 +59,10 @@ public class LedgerController {
                 getLedgerExpenses());
         List<ExpensesDTO> expensesDTOS = new ArrayList<>();
         for(Map<String, Long> e : expenses){
-            expensesDTOS.add(new ExpensesDTO(e.keySet().stream().collect(Collectors.toList()).get(0),
-            e.values().stream().collect(Collectors.toList()).get(0)));
+            expensesDTOS.add(new ExpensesDTO(new ArrayList<>(e.keySet()).get(0),
+                    new ArrayList<>(e.values()).get(0)));
         }
+        log.info("expensesDTOs = {}", expensesDTOS);
         return ResponseEntity.ok().body(expensesDTOS);
     }
 
