@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.dto;
 
+import com.course.project.businessmanager.entity.enums.ProcurementType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpensesDTO {
-    private List<String> name = Collections.emptyList();
+    private List<ProcurementType> name = Collections.emptyList();
     private List<Long> price =Collections.emptyList();
 }

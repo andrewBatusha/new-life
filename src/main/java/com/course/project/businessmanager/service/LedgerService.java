@@ -1,7 +1,7 @@
 package com.course.project.businessmanager.service;
 
-import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.Ledger;
+import com.course.project.businessmanager.entity.enums.ProcurementType;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +10,6 @@ public interface LedgerService extends BasicService<Ledger, UUID>{
     List<Ledger> getBestProduct(String name);
 
     Long getTotalProcurement(String name, String buildingName);
-    List<String> getExpensesName(String name);
+    List<ProcurementType> getExpensesName(String name);
     List<Long> getExpensesPrice(String name);
 }

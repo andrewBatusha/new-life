@@ -85,7 +85,7 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public List<String> getExpensesName(String name){
+    public List<ProcurementType> getExpensesName(String name){
         return ledgerRepository.findExpensesName(name).orElse(Collections.emptyList());
     }
 
