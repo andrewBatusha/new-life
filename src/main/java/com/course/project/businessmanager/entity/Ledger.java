@@ -39,6 +39,19 @@ import java.util.UUID;
                 "join l.building b " +
                 "where b.name =:buildingName and l.bookkeeping =:procurement "
 )
+
+@NamedQuery(
+        name = "findExpensesName",
+        query = "select l.procurementType from Ledger l " +
+                "join l.building b " +
+                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'"
+)
+@NamedQuery(
+        name = "findExpensesPrice",
+        query = "select sum(l.price) from Ledger l " +
+                "join l.building b " +
+                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'"
+)
 @Entity
 @NoArgsConstructor
 @Data

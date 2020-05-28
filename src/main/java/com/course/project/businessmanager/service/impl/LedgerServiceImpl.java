@@ -1,6 +1,5 @@
 package com.course.project.businessmanager.service.impl;
 
-import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.entity.Warehouse;
@@ -78,6 +77,16 @@ public class LedgerServiceImpl implements LedgerService {
     @Override
     public List<Ledger> getBestProduct(String name){
         return ledgerRepository.findBestProduct(name).orElse(Collections.emptyList());
+    }
+
+    @Override
+    public List<Long> getExpensesPrice(String name){
+        return ledgerRepository.findExpensesPrice(name).orElse(Collections.emptyList());
+    }
+
+    @Override
+    public List<String> getExpensesName(String name){
+        return ledgerRepository.findExpensesName(name).orElse(Collections.emptyList());
     }
 
     @Override

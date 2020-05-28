@@ -59,6 +59,15 @@ public class LedgerController {
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getBestProduct(name)));
     }
 
+    @GetMapping("/expenses")
+    public ResponseEntity<ExpensesDTO> expensesList(@RequestParam String name) {
+        log.info("Enter into expensesList of LedgerController");
+        ExpensesDTO expensesDTO = new ExpensesDTO();
+        expensesDTO.setName(ledgerService.getExpensesName(name));
+        expensesDTO.setPrice(ledgerService.getExpensesPrice(name));
+        return ResponseEntity.ok().body(expensesDTO);
+    }
+
     @GetMapping("/total")
     public ResponseEntity<Long> bestProductList(@RequestParam String procurementName,
         @RequestParam String buildingName){

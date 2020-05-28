@@ -5,11 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collections;
+import java.util.List;
+
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpensesDTO {
-    private String key;
-    private Long value;
+    private List<String> name = Collections.emptyList();
+    private List<Long> price =Collections.emptyList();
 }

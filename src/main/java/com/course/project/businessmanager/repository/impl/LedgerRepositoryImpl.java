@@ -37,4 +37,25 @@ public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> impl
         }
         return Optional.of(query.getResultList().get(0));
     }
+
+    @Override
+    public Optional<List<Long>> findExpensesPrice(String buildingName){
+        TypedQuery<Long> query = getSession().createNamedQuery("findExpensesPrice", Long.class);
+        query.setParameter("buildingName", buildingName);
+        List<Long> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList());
+    }
+    @Override
+    public Optional<List<String>> findExpensesName(String buildingName){
+        TypedQuery<String> query = getSession().createNamedQuery("findExpensesName", String.class);
+        query.setParameter("buildingName", buildingName);
+        List<String> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList());
+    }
 }
