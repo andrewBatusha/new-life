@@ -15,7 +15,7 @@ import java.util.UUID;
 public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> implements LedgerRepository {
     @Override
    public Optional<List<Ledger>> findBestProduct(String buildingName){
-       TypedQuery<Ledger> query = getSession().createNamedQuery("findEquipmentName", Ledger.class).setMaxResults(5);
+       TypedQuery<Ledger> query = getSession().createNamedQuery("findBestProduct", Ledger.class).setMaxResults(5);
        query.setParameter("buildingName", buildingName);
        List<Ledger> resultList = query.getResultList();
        if (resultList.isEmpty()) {
