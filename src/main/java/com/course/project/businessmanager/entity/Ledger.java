@@ -2,6 +2,8 @@ package com.course.project.businessmanager.entity;
 
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.entity.enums.ProcurementType;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.OptBoolean;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -44,7 +46,8 @@ public class Ledger implements Serializable {
     private ProcurementType procurementType;
 
     @Column(name = "due_time")
-    @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss")
+    @DateTimeFormat(pattern = "MM/dd/yyyy HH:mm")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy HH:mm", lenient = OptBoolean.FALSE, timezone = "GMT+3")
     private LocalDateTime dueTime;
 
 
