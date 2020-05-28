@@ -51,6 +51,7 @@ public class LedgerController {
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getAll()));
     }
 
+    @GetMapping("/expenses")
     public ResponseEntity<List<LedgerDTO>> expensesList() {
         log.info("Enter into list of LedgerController");
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getLedgerExpenses()));
