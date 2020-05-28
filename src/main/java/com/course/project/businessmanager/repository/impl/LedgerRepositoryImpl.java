@@ -16,6 +16,6 @@ public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> impl
     public List<Map<String, Long>> findExpenses() {
         return (List<Map<String, Long>>) getSession().createQuery
                 ("select new map(l.name, sum(l.price)) from Ledger l " +
-        "where l.bookkeeping = 'EXPENSES' group by l.name, l.price").getResultList();
+        "where l.bookkeeping = 'EXPENSES' group by l.name, l.price").list();
     }
 }

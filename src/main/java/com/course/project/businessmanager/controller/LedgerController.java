@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.controller;
 
+import com.course.project.businessmanager.dto.ExpensesDTO;
 import com.course.project.businessmanager.dto.LedgerDTO;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.mapper.LedgerMapper;
@@ -20,9 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.security.acl.LastOwnerException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @Api(tags = "Ledger API")
@@ -48,9 +53,16 @@ public class LedgerController {
 
     @GetMapping("/expenses")
     @ApiOperation(value = "Get the list of all ledgers")
-    public ResponseEntity<List<Map<String, Long>>> expensesList() {
+    public ResponseEntity<List<ExpensesDTO>> expensesList() {
         log.info("Enter into list of LedgerController");
-        return ResponseEntity.ok().body(ledgerService.getLedgerExpenses());
+        List<Map<String, Long>> expenses  = new ArrayList<>(ledgerService.
+                getLedgerExpenses());
+        List<ExpensesDTO> expensesDTOS = new ArrayList<>();
+        for(Map<String, Long> e : expenses){
+            expensesDTOS.add(new ExpensesDTO(e.keySet().stream().collect(Collectors.toList()).get(0),
+            e.values().stream().collect(Collectors.toList()).get(0)));
+        }
+        return ResponseEntity.ok().body(expensesDTOS);
     }
 
 
