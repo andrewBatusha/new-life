@@ -30,6 +30,7 @@ import java.util.UUID;
         query = "select l from Ledger l " +
                 "join l.building b " +
                 "where b.name =:buildingName and l.bookkeeping = 'INCOME' " +
+                "group by l.id " +
                 "order by sum(l.price)"
 )
 @Entity
