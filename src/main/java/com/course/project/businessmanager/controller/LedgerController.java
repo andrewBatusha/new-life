@@ -51,19 +51,9 @@ public class LedgerController {
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getAll()));
     }
 
-    @GetMapping("/expenses")
-    @ApiOperation(value = "Get the list of all ledgers")
-    public ResponseEntity<List<ExpensesDTO>> expensesList() {
+    public ResponseEntity<List<LedgerDTO>> expensesList() {
         log.info("Enter into list of LedgerController");
-        List<Map<String, Long>> expenses  = new ArrayList<>(ledgerService.
-                getLedgerExpenses());
-        List<ExpensesDTO> expensesDTOS = new ArrayList<>();
-        for(Map<String, Long> e : expenses){
-            expensesDTOS.add(new ExpensesDTO(new ArrayList<>(e.keySet()).get(0),
-                    new ArrayList<>(e.values()).get(0)));
-        }
-        log.info("expensesDTOs = {}", expensesDTOS);
-        return ResponseEntity.ok().body(expensesDTOS);
+        return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getLedgerExpenses()));
     }
 
 
