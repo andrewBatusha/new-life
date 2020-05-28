@@ -8,4 +8,6 @@ import java.util.UUID;
 
 public interface LedgerService extends BasicService<Ledger, UUID>{
     List<Ledger> getBestProduct(String name);
+
+    public Long getTotalProcurement(String name, String buildingName);
 }

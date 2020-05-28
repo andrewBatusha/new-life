@@ -33,6 +33,12 @@ import java.util.UUID;
                 "group by l.id " +
                 "order by sum(l.price)"
 )
+@NamedQuery(
+        name = "findByProcurementType",
+        query = "select sum(l.price) from Ledger l " +
+                "join l.building b " +
+                "where b.name =:buildingName and l.bookkeeping =:procurement "
+)
 @Entity
 @NoArgsConstructor
 @Data

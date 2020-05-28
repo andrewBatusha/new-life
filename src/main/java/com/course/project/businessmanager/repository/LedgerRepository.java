@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface LedgerRepository extends BasicRepository<Ledger, UUID> {
     Optional<List<Ledger>> findBestProduct(String buildingName);
+    Optional<Long> findTotalByProcurement(String buildingName, String procurementType);
 }

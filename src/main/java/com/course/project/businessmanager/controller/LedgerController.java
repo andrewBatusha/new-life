@@ -59,6 +59,13 @@ public class LedgerController {
         return ResponseEntity.ok().body(ledgerMapper.convertToDtoList(ledgerService.getBestProduct(name)));
     }
 
+    @GetMapping("/total")
+    public ResponseEntity<Long> bestProductList(@RequestParam String procurementName,
+        @RequestParam String buildingName){
+        log.info("Enter into list of LedgerController");
+        return ResponseEntity.ok().body(ledgerService.getTotalProcurement(procurementName, buildingName));
+    }
+
 
     @PostMapping
     @ApiOperation(value = "Create new ledger")

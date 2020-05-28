@@ -80,6 +80,12 @@ public class LedgerServiceImpl implements LedgerService {
         return ledgerRepository.findBestProduct(name).orElse(Collections.emptyList());
     }
 
+    @Override
+    public Long getTotalProcurement(String name, String buildingName){
+        return ledgerRepository.findTotalByProcurement(name, buildingName).
+                orElse(null);
+    }
+
     /**
      * Method updates information for an existing ledger in  Repository
      *

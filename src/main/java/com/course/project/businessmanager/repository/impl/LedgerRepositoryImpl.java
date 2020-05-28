@@ -1,6 +1,7 @@
 package com.course.project.businessmanager.repository.impl;
 
 import com.course.project.businessmanager.entity.Ledger;
+import com.course.project.businessmanager.entity.enums.ProcurementType;
 import com.course.project.businessmanager.repository.LedgerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,17 @@ public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> impl
            return Optional.empty();
        }
        return Optional.of(query.getResultList());
+    }
+
+    @Override
+    public Optional<Long> findTotalByProcurement(String buildingName, String procurementType){
+        TypedQuery<Long> query = getSession().createNamedQuery("findByProcurementType", Long.class).setMaxResults(1);
+        query.setParameter("buildingName", buildingName);
+        query.setParameter("procurement", procurementType);
+        List<Long> resultList = query.getResultList();
+        if (resultList.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(query.getResultList().get(0));
     }
 }
