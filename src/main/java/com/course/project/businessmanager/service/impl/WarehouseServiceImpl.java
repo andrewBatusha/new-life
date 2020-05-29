@@ -85,7 +85,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             dbWarehouse = warehouseRepository.update(dbWarehouse);
         } else if (bookkeeping == Bookkeeping.INCOME) {
             if (dbWarehouse.getQuantity() < object.getQuantity()) {
-                throw new EntityWithQuantityException("fuck of");
+                throw new EntityWithQuantityException("you ary trying to sell more than you have at warehouse");
             } else if (dbWarehouse.getQuantity().equals(object.getQuantity())) {
                 dbWarehouse = delete(dbWarehouse);
             } else {

@@ -77,7 +77,7 @@ public class EquipmentServiceImpl implements EquipmentService {
             equipment = equipmentRepository.update(equipment);
         } else if (bookkeeping == Bookkeeping.INCOME) {
             if (equipment.getQuantity() < object.getQuantity() || equipment.getEmployee() == null) {
-                throw new EntityWithQuantityException("fuck off");
+                throw new EntityWithQuantityException("you ary trying to sell more than you have at equipment");
             } else if (equipment.getQuantity().equals(object.getQuantity())) {
                 equipment = delete(equipment);
             } else {

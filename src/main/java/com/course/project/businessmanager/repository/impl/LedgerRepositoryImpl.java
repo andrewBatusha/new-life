@@ -40,16 +40,6 @@ public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> impl
     }
 
     @Override
-    public Optional<List<Long>> findExpensesPrice(String buildingName){
-        TypedQuery<Long> query = getSession().createNamedQuery("findExpensesPrice", Long.class);
-        query.setParameter("buildingName", buildingName);
-        List<Long> resultList = query.getResultList();
-        if (resultList.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(query.getResultList());
-    }
-    @Override
     public Optional<List<ExpensesDTO>> findExpensesName(String buildingName){
         TypedQuery<ExpensesDTO> query = getSession().createNamedQuery("findExpensesName", ExpensesDTO.class);
         query.setParameter("buildingName", buildingName);

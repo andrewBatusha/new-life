@@ -81,11 +81,6 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public List<Long> getExpensesPrice(String name){
-        return ledgerRepository.findExpensesPrice(name).orElse(Collections.emptyList());
-    }
-
-    @Override
     public List<ExpensesDTO> getExpensesName(String name){
         return ledgerRepository.findExpensesName(name).orElse(null);
     }

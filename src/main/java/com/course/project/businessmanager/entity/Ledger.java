@@ -47,14 +47,6 @@ import java.util.UUID;
                 "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'" +
                 "group by l.procurementType "
 )
-@NamedQuery(
-        name = "findExpensesPrice",
-        query = "select sum(l.price) from Ledger l " +
-                "join l.building b " +
-                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES' " +
-                "group by l.procurementType " +
-                "order by sum(l.price)"
-)
 @Entity
 @NoArgsConstructor
 @Data
