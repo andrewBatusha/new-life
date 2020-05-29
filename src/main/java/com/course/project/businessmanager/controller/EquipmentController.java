@@ -2,7 +2,10 @@ package com.course.project.businessmanager.controller;
 
 import com.course.project.businessmanager.dto.AssignEmployeeToEquipmentDTO;
 import com.course.project.businessmanager.dto.EquipmentDTO;
+import com.course.project.businessmanager.dto.NoteDTO;
 import com.course.project.businessmanager.entity.Equipment;
+import com.course.project.businessmanager.entity.Note;
+import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.mapper.EquipmentMapper;
 import com.course.project.businessmanager.service.EquipmentService;
 import io.swagger.annotations.Api;
@@ -51,5 +54,13 @@ public class EquipmentController {
         Equipment equipmentToUpdate = equipmentMapper.convertToEntity(assignEmployeeToEquipmentDTO);
         equipmentService.assignEmployee(equipmentToUpdate, assignEmployeeToEquipmentDTO.getEmail());
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PutMapping
+    @ApiOperation(value = "Update existing equipment by id")
+    public ResponseEntity<EquipmentDTO> update(@Valid @RequestBody EquipmentDTO equipmentDTO) {
+        log.info("In update (equipmentDTO = [{}])", equipmentDTO);
+        Equipment equipment = equipmentService.update(equipmentMapper.convertToEntity(equipmentDTO), Bookkeeping.EXPENSES);
+        return ResponseEntity.status(HttpStatus.OK).body(equipmentMapper.convertToDto(equipment));
     }
 }
