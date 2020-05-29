@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.service.impl;
 
+import com.course.project.businessmanager.dto.ExpensesDTO;
 import com.course.project.businessmanager.entity.Equipment;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.entity.Warehouse;
@@ -85,8 +86,8 @@ public class LedgerServiceImpl implements LedgerService {
     }
 
     @Override
-    public List<ProcurementType> getExpensesName(String name){
-        return ledgerRepository.findExpensesName(name).orElse(Collections.emptyList());
+    public List<ExpensesDTO> getExpensesName(String name){
+        return ledgerRepository.findExpensesName(name).orElse(null);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.course.project.businessmanager.repository.impl;
 
+import com.course.project.businessmanager.dto.ExpensesDTO;
 import com.course.project.businessmanager.entity.Ledger;
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.entity.enums.ProcurementType;
@@ -49,10 +50,10 @@ public class LedgerRepositoryImpl extends BasicRepositoryImpl<Ledger, UUID> impl
         return Optional.of(query.getResultList());
     }
     @Override
-    public Optional<List<ProcurementType>> findExpensesName(String buildingName){
-        TypedQuery<ProcurementType> query = getSession().createNamedQuery("findExpensesName", ProcurementType.class);
+    public Optional<List<ExpensesDTO>> findExpensesName(String buildingName){
+        TypedQuery<ExpensesDTO> query = getSession().createNamedQuery("findExpensesName", ExpensesDTO.class);
         query.setParameter("buildingName", buildingName);
-        List<ProcurementType> resultList = query.getResultList();
+        List<ExpensesDTO> resultList = query.getResultList();
         if (resultList.isEmpty()) {
             return Optional.empty();
         }

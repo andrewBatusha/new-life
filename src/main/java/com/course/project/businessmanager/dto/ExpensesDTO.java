@@ -6,14 +6,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Collections;
-import java.util.List;
-
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExpensesDTO {
-    private List<ProcurementType> name = Collections.emptyList();
-    private List<Long> price =Collections.emptyList();
+    private ProcurementType name;
+    private Long price;
 }

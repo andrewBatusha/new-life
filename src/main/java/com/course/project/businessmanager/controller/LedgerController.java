@@ -60,12 +60,9 @@ public class LedgerController {
     }
 
     @GetMapping("/expenses")
-    public ResponseEntity<ExpensesDTO> expensesList(@RequestParam String name) {
+    public ResponseEntity<List<ExpensesDTO>> expensesList(@RequestParam String name) {
         log.info("Enter into expensesList of LedgerController");
-        ExpensesDTO expensesDTO = new ExpensesDTO();
-        expensesDTO.setName(ledgerService.getExpensesName(name));
-        expensesDTO.setPrice(ledgerService.getExpensesPrice(name));
-        return ResponseEntity.ok().body(expensesDTO);
+        return ResponseEntity.ok().body(ledgerService.getExpensesName(name));
     }
 
     @GetMapping("/total")
