@@ -2,7 +2,6 @@ package com.course.project.businessmanager.service.impl;
 
 import com.course.project.businessmanager.entity.Employee;
 import com.course.project.businessmanager.entity.Equipment;
-import com.course.project.businessmanager.entity.Warehouse;
 import com.course.project.businessmanager.entity.enums.Bookkeeping;
 import com.course.project.businessmanager.exception.BookKeepingException;
 import com.course.project.businessmanager.exception.EntityNotFoundException;
@@ -76,8 +75,8 @@ public class EquipmentServiceImpl implements EquipmentService {
             equipment.setQuantity(equipment.getQuantity() + object.getQuantity());
             equipment = equipmentRepository.update(equipment);
         } else if (bookkeeping == Bookkeeping.INCOME) {
-            if (equipment.getQuantity() < object.getQuantity() || equipment.getEmployee() == null) {
-                throw new EntityWithQuantityException("you ary trying to sell more than you have at equipment");
+            if (equipment.getQuantity() < object.getQuantity()) {
+                throw new EntityWithQuantityException("you ary trying to sell more equipment than you have");
             } else if (equipment.getQuantity().equals(object.getQuantity())) {
                 equipment = delete(equipment);
             } else {
