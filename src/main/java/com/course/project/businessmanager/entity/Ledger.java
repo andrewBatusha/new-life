@@ -42,11 +42,10 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findExpensesName",
-        query = "select distinct l.procurementType, sum(l.price) from Ledger l " +
+        query = "select distinct l.procurementType from Ledger l " +
                 "join l.building b " +
                 "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'" +
-                "group by l.procurementType " +
-                "order by sum(l.price)"
+                "group by l.procurementType "
 )
 @NamedQuery(
         name = "findExpensesPrice",
