@@ -42,7 +42,7 @@ import java.util.UUID;
 
 @NamedQuery(
         name = "findExpensesName",
-        query = "select l.procurementType from Ledger l " +
+        query = "select distinct l.procurementType from Ledger l " +
                 "join l.building b " +
                 "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'"
 )
@@ -50,7 +50,9 @@ import java.util.UUID;
         name = "findExpensesPrice",
         query = "select sum(l.price) from Ledger l " +
                 "join l.building b " +
-                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'"
+                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES' " +
+                "and l.procurementType = some (" +
+                "    select distinct l.procurementType from Ledger l)"
 )
 @Entity
 @NoArgsConstructor
