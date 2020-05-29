@@ -44,15 +44,15 @@ import java.util.UUID;
         name = "findExpensesName",
         query = "select distinct l.procurementType from Ledger l " +
                 "join l.building b " +
-                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'"
+                "where b.name =: buildingName and l.bookkeeping = 'EXPENSES'" +
+                "order by sum(l.price)"
 )
 @NamedQuery(
         name = "findExpensesPrice",
         query = "select sum(l.price) from Ledger l " +
                 "join l.building b " +
                 "where b.name =: buildingName and l.bookkeeping = 'EXPENSES' " +
-                "and l.procurementType = some (" +
-                "    select distinct l.procurementType from Ledger l)"
+                "group by l.procurementType"
 )
 @Entity
 @NoArgsConstructor
