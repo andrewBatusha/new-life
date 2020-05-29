@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +19,8 @@ import java.util.UUID;
 public class AddManagerToBuildingDTO {
     private UUID id;
 
+    @NotBlank(message = "Name cannot be empty")
+    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
     private String geolocation;
@@ -34,5 +38,7 @@ public class AddManagerToBuildingDTO {
     private User user;
 
     @Email
+    @Size(min = 5, max = 40)
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 }

@@ -37,6 +37,7 @@ public class AssignEmployeeToEquipmentDTO {
     private Building building;
 
     @Email
-    @NotBlank
+    @Size(min = 5, max = 40)
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 }

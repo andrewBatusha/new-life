@@ -4,6 +4,7 @@ import com.course.project.businessmanager.entity.Building;
 import com.course.project.businessmanager.entity.User;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
@@ -22,5 +23,8 @@ public class AddOwnerToBusinessDTO {
 
     private List<Building> buildings = new ArrayList<>();
 
+    @Email
+    @Size(min = 5, max = 40)
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 }
