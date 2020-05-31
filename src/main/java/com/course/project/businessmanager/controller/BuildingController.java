@@ -62,7 +62,7 @@ public class BuildingController {
 
     @PostMapping
     @ApiOperation(value = "Create new building")
-    public ResponseEntity<BuildingDTO> save(@RequestBody BuildingDTO buildingDTO) {
+    public ResponseEntity<BuildingDTO> save(@Valid @RequestBody BuildingDTO buildingDTO) {
         log.info("Enter into save of BuildingController with buildingDTO: {}", buildingDTO);
         Building building = buildingService.save(buildingMapper.convertToEntity(buildingDTO));
         return ResponseEntity.status(HttpStatus.CREATED).body(buildingMapper.convertToDto(building));
