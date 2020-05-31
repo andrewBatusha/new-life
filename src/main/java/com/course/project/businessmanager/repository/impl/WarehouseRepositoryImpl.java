@@ -46,6 +46,4 @@ public class WarehouseRepositoryImpl extends BasicRepositoryImpl<Warehouse, UUID
         }
         return Optional.of(query.getResultList().get(0));
     }
-
-
 }
