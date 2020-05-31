@@ -10,9 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
@@ -27,8 +25,8 @@ public class LedgerDTO {
 
     private UUID id;
 
-    @NotBlank(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
+    @NotBlank
+    @Size(min = 2, max = 35)
     private String name;
 
     @Positive
@@ -42,7 +40,7 @@ public class LedgerDTO {
     private LocalDateTime dueTime;
 
     @NotBlank
-    @Size(min = 2, max = 10, message = "unit of measurement must be between 2 and 10 characters long")
+    @Size(min = 2, max = 10)
     private String unitOfMeasurement;
 
     @PositiveOrZero
