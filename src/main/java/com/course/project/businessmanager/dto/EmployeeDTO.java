@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -31,7 +32,8 @@ public class EmployeeDTO {
     @Size(min = 2, max = 35, message = "Patronymic must be between 2 and 35 characters long")
     private String patronymic;
 
-    private PositionDTO position;
+    @Valid
+    private Position position;
 
     private TimeType timeType;
 
