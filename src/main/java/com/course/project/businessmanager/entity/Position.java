@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -22,6 +25,8 @@ public class Position implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @NotBlank(message = "position name cannot be empty")
+    @Size(min = 2, max = 35, message = "position name must be between 2 and 35 characters long")
     @Column(length = 35, nullable = false)
     private String name;
 
@@ -29,7 +34,9 @@ public class Position implements Serializable {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
+    @PositiveOrZero(message = "salary must be positive or zero")
     private Long salary;
 
+    @PositiveOrZero(message = "number of subordinate must be positive or zero")
     private Long numberOfSubordinate;
 }

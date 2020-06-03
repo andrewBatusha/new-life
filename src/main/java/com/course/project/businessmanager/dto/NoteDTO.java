@@ -21,11 +21,11 @@ public class NoteDTO {
     private UUID id;
 
     @NotBlank(message = "Note title cannot be empty")
-    @Size(min = 2, max = 100, message = "Title must be between 2 and 100 characters long")
+    @Size(min = 2, max = 100, message = "Note title must be between 2 and 100 characters long")
     private String title;
 
     @NotBlank(message = "Note body cannot be empty")
-    @Size(min = 2, max = 250, message = "Name must be between 2 and 250 characters long")
+    @Size(min = 2, max = 250, message = "Note body must be between 2 and 250 characters long")
     private String body;
 
     private Priority priority;

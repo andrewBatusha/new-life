@@ -17,8 +17,8 @@ public class PositionDTO {
 
     private UUID id;
 
-    @NotBlank(message = "Name cannot be empty")
-    @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
+    @NotBlank(message = "position name cannot be empty")
+    @Size(min = 2, max = 35, message = "position name must be between 2 and 35 characters long")
     private String name;
 
     private Employee employee;
