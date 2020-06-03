@@ -31,7 +31,7 @@ public class EmployeeDTO {
     @Size(min = 2, max = 35, message = "Patronymic must be between 2 and 35 characters long")
     private String patronymic;
 
-    private Position position;
+    private PositionDTO position;
 
     private TimeType timeType;
 
