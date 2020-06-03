@@ -23,12 +23,12 @@ public class AssignEmployeeToEquipmentDTO {
     @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
-    @Positive
-    @Min(1)
+    @Positive(message = "quantity must be positive")
+    @Min(value = 1, message = "the lowest value for quantity field is 1")
     private Long quantity;
 
-    @Positive
-    @Min(1)
+    @Positive(message = "price must be positive")
+    @Min(value = 1, message = "the lowest value for price field is 1")
     private Long price;
 
     private Employee employee;
@@ -36,8 +36,8 @@ public class AssignEmployeeToEquipmentDTO {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Building building;
 
-    @Email
-    @Size(min = 5, max = 40)
+    @Email(message = "input email must be a well-formed")
+    @Size(min = 5, max = 40, message = "Email must be between 2 and 35 characters long")
     @NotBlank(message = "Email cannot be empty")
     private String email;
 }

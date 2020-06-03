@@ -23,7 +23,7 @@ public class AddOwnerToBusinessDTO {
 
     private List<Building> buildings = new ArrayList<>();
 
-    @Email
+    @Email(message = "input email must be a well-formed")
     @Size(min = 5, max = 40)
     @NotBlank(message = "Email cannot be empty")
     private String email;

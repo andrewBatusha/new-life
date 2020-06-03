@@ -16,9 +16,12 @@ import java.util.UUID;
 public class UserCreateDTO {
 
     private UUID id;
+
     @Email
     @Size(min = 5, max = 40)
     @NotBlank(message = "Email cannot be empty")
     private String email;
+
+    @NotBlank(message = "password must not be blank")
     private String password;
 }

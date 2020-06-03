@@ -19,12 +19,12 @@ public class EquipmentDTO {
     @Size(min = 2, max = 35, message = "Name must be between 2 and 35 characters long")
     private String name;
 
-    @Positive
-    @Min(1)
+    @Positive(message = "quantity must be positive")
+    @Min(value = 1, message = "the lowest value for quantity field is 1")
     private Long quantity;
 
-    @Positive
-    @Min(1)
+    @Positive(message = "quantity must be positive")
+    @Min(value = 1, message = "the lowest value for price field is 1")
     private Long price;
 
     private Employee employee;

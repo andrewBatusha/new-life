@@ -10,11 +10,11 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 public class AuthenticationRequestDTO {
-    @Email
-    @Size(min = 5, max = 40)
+    @Email(message = "input email must be a well-formed")
+    @Size(min = 5, max = 40, message = "Email must be between 2 and 35 characters long")
     @NotBlank(message = "Email cannot be empty")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "password must not be blank")
     private String password;
 }

@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.util.UUID;
@@ -24,9 +23,9 @@ public class PositionDTO {
 
     private Employee employee;
 
-    @Positive
+    @PositiveOrZero(message = "salary must be positive or zero")
     private Long salary;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "number of subordinate must be positive or zero")
     private Long numberOfSubordinate;
 }
